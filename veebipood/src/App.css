@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.Pilt {
+  /* pildi puhul võiks panna ainult ühe, kas height või width, sest see muudab automaatselt pildi normaalseks  */
+  height: 100px;
+
+  /* pildil ümarad ääred: */
+  border-radius: 10px;
+  /* ring: */
+  border-radius: 50%;
+}
+
+/* animatsioonid: */
+.Pilt:hover {
+  /* läbipaistvus 10% originaalist */
+  opacity: 0.1;
+
+  /* hiireikooni muutus */
+  cursor: pointer;
+}
+
+.Pilt:active {
+  /* ära muuda height, sest teised elemendid muutuvad ka asukohta, transform on parem */
+  /* height: 95px; */
+  transform: scale(0.95);
+}
+
+.Nupp {
+  background-color: brown;
+  color: white;
+  border-radius: 3px;
+  border: 1px solid maroon;
+}
+
+.Nupp:hover {
+  cursor: pointer;
+  background-color: pink;
+}
+
+.Nupp:active {
+  text-decoration: underline;
+  background-color: yellow;
+}

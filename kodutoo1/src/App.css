@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.Nupp {
+  background-color: green;
+  color: lightgrey;
+}
+
+.Nupp:hover {
+  height: 100px;
+}
+
+.Nupp:active {
+  cursor: grab;
+}
+
+.Tekst1 {
+  color: blue;
+  font-style: italic;
+}
+
+.Tekst1:hover {
+  font-size: 24px;
+}
+
+.Tekst2 {
+  color: green;
+  font-weight: bold;
+  border: 2px solid red;
+}
+
+.Tekst2:hover {
+  border-color: brown;
+}
+
+.Pilt {
+  height: 100px;
+}
+
+.Pilt:hover {
+  border-radius: 10px;
+}
+
+.Pilt:active {
+  opacity: 0.2;
+}
+
+.Tabel {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}

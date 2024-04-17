@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.PõhiPilt {
+  height: 100px;
+}
+
+.Triip {
+  width: 100px;
+  margin: auto;
+}
+
+.PildiGrupp {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.LinkPilt {
+  color: rgb(66, 18, 18);
+  background-color: white;
+  width: 300px;
+  height: 200px;
+  margin-top: 20px;
+  padding: 20px 0;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.LinkPilt img {
+    height: 50px;
+}
+
+.LinkPilt p {
+  font-family: 'Roboto'
+}

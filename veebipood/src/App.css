@@ -4,7 +4,7 @@
 
 .Pilt {
   /* pildi puhul võiks panna ainult ühe, kas height või width, sest see muudab automaatselt pildi normaalseks  */
-  height: 100px;
+  height: 50px;
 
   /* pildil ümarad ääred: */
   border-radius: 10px;
@@ -42,4 +42,25 @@
 .Nupp:active {
   text-decoration: underline;
   background-color: yellow;
+}
+
+.linn {
+  font-size: 20px;
+}
+
+.linn:hover {
+  text-decoration: underline;
+  color: coral;
+  cursor: pointer;
+}
+
+.linn-aktiivne {
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: coral;
+}
+
+.linn-aktiivne:hover {
+  color: coral;
+  cursor: pointer;
 }

@@ -15,54 +15,32 @@ function App() {
   const kasutajaNimiRef = useRef();
   const paroolRef = useRef();
 
-  function containsUppercase(str) {
-    for (let i = 0; i < str.length; i++) {
-      if (str[i] === str[i].toUpperCase() && str[i] !== str[i].toLowerCase()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  function containsLowercase(str) {
-    for (let i = 0; i < str.length; i++) {
-      if (str[i] === str[i].toLowerCase() && str[i] !== str[i].toUpperCase()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   function sisseLogimine() {
+    if (paroolRef.current.value.length < 8) {
+      toast.error("Parool peab olema pikem kui 8 tähemärki");
+      return;
+    }
+
+    if (paroolRef.current.value.toLowerCase() === paroolRef.current.value) {
+      toast.error("Paroolil peab olema mõni suur täht");
+      return;
+    }
+
+    if (paroolRef.current.value.toUpperCase() === paroolRef.current.value) {
+      toast.error("Paroolil peab olema mõni väike täht");
+      return;
+    }
+
+    if (paroolRef.current.value.includes("%") === false) {
+      toast.error("Parool peab sisaldama sümbolit '%'");
+      return;
+    }
+
     // if (paroolRef.current.value !== "123") {
-    //   muudaSonumit("Vale Parool");
+    //   toast.error("Vale Parool");
     //   toast.error("sonum");
     //   return;
     // }
-
-    if (paroolRef.current.value.length < 8) {
-      muudaSonumit("Parool peab olema pikem kui 8 tähemärki");
-      toast.error("sonum");
-      return;
-    }
-
-    if (!containsUppercase(paroolRef.current.value)) {
-      muudaSonumit("Paroolil peab olema mõni suur täht");
-      toast.error("sonum");
-      return;
-    }
-
-    if (!containsLowercase(paroolRef.current.value)) {
-      muudaSonumit("Paroolil peab olema mõni väike täht");
-      toast.error("sõnum");
-      return;
-    }
-
-    if (paroolRef.current.value.includes("%") !== true) {
-      muudaSonumit("Parool peab sisaldama sümbolit '%'");
-      toast.error("sõnum");
-      return;
-    }
 
     muudaSisselogitud("jah");
     muudaSonumit(kasutajaNimiRef.current.value + ", oled sisselogitud");

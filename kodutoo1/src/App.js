@@ -1,11 +1,12 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import "./App.css";
 import Avaleht from "./pages/Avaleht";
 import Kontakt from "./pages/Kontakt";
+import Leht from "./pages/Leht";
 import Meist from "./pages/Meist";
 import Seaded from "./pages/Seaded";
-import Leht from "./pages/Leht";
 
 function App() {
   const [sisseLogitud, muudaSisselogitud] = useState("ei");
@@ -14,13 +15,58 @@ function App() {
   const kasutajaNimiRef = useRef();
   const paroolRef = useRef();
 
-  function sisseLogimine() {
-    if (paroolRef.current.value === "123") {
-      muudaSisselogitud("jah");
-      muudaSonumit(kasutajaNimiRef.current.value + ", oled sisselogitud");
-    } else {
-      muudaSonumit("Vale Parool");
+  function containsUppercase(str) {
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === str[i].toUpperCase() && str[i] !== str[i].toLowerCase()) {
+        return true;
+      }
     }
+    return false;
+  }
+
+  function containsLowercase(str) {
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === str[i].toLowerCase() && str[i] !== str[i].toUpperCase()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function sisseLogimine() {
+    // if (paroolRef.current.value !== "123") {
+    //   muudaSonumit("Vale Parool");
+    //   toast.error("sonum");
+    //   return;
+    // }
+
+    if (paroolRef.current.value.length < 8) {
+      muudaSonumit("Parool peab olema pikem kui 8 tähemärki");
+      toast.error("sonum");
+      return;
+    }
+
+    if (!containsUppercase(paroolRef.current.value)) {
+      muudaSonumit("Paroolil peab olema mõni suur täht");
+      toast.error("sonum");
+      return;
+    }
+
+    if (!containsLowercase(paroolRef.current.value)) {
+      muudaSonumit("Paroolil peab olema mõni väike täht");
+      toast.error("sõnum");
+      return;
+    }
+
+    if (paroolRef.current.value.includes("%") !== true) {
+      muudaSonumit("Parool peab sisaldama sümbolit '%'");
+      toast.error("sõnum");
+      return;
+    }
+
+    muudaSisselogitud("jah");
+    muudaSonumit(kasutajaNimiRef.current.value + ", oled sisselogitud");
+    toast.success("sõnum");
   }
 
   return (
@@ -78,48 +124,55 @@ function App() {
       />
       <h2>HTML Table</h2>
       <table className="Tabel">
-        <tr>
-          <th>Company</th>
-          <th>Contact</th>
-          <th>Country</th>
-        </tr>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
-        </tr>
-        <tr>
-          <td>Ernst Handel</td>
-          <td>Roland Mendel</td>
-          <td>Austria</td>
-        </tr>
-        <tr>
-          <td>Island Trading</td>
-          <td>Helen Bennett</td>
-          <td>UK</td>
-        </tr>
-        <tr>
-          <td>Laughing Bacchus Winecellars</td>
-          <td>Yoshi Tannamuri</td>
-          <td>Canada</td>
-        </tr>
-        <tr>
-          <td>Magazzini Alimentari Riuniti</td>
-          <td>Giovanni Rovelli</td>
-          <td>Italy</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+          <tr>
+            <td>Ernst Handel</td>
+            <td>Roland Mendel</td>
+            <td>Austria</td>
+          </tr>
+          <tr>
+            <td>Island Trading</td>
+            <td>Helen Bennett</td>
+            <td>UK</td>
+          </tr>
+          <tr>
+            <td>Laughing Bacchus Winecellars</td>
+            <td>Yoshi Tannamuri</td>
+            <td>Canada</td>
+          </tr>
+          <tr>
+            <td>Magazzini Alimentari Riuniti</td>
+            <td>Giovanni Rovelli</td>
+            <td>Italy</td>
+          </tr>
+        </tbody>
       </table>
+
       <iframe
         width="560"
         height="315"
         src="https://www.youtube.com/embed/D0MxmDWk4t0?si=Cr83tR6ovZO-2dGa"
         title="YouTube video player"
       ></iframe>
+
+      <ToastContainer position="bottom-right" autoClose={4000} />
     </div>
   );
 }

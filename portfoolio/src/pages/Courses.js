@@ -22,6 +22,7 @@ function Courses() {
         Coursera
       </button>
       <button
+        className={kursus === "Codecadamy" ? "Kursus-Aktiivne" : "Kursus"}
         onClick={() => uuendaKursus("Codecadamy")}
       >
         Codecadamy

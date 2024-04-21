@@ -1,9 +1,9 @@
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Avaleht from './pages/Avaleht.js'
-import Uudised from './pages/Uudised.js'
-import Kontakt from './pages/Kontakt.js'
-import Meist from './pages/Meist.js'
+import Avaleht from './pages/Avaleht.js';
+import Kontakt from './pages/Kontakt.js';
+import Meist from './pages/Meist.js';
+import Uudised from './pages/Uudised.js';
 
 function App() {
   return (

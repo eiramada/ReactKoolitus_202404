@@ -1,0 +1,84 @@
+.App {
+  text-align: center;
+}
+
+.pakett {
+  margin: 20px;
+}
+
+.pakett:hover {
+  border: 1px solid purple;
+}
+
+.pakett-aktiivne {
+  margin: 20px;
+  border: 3px solid purple;
+}
+
+.ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.must-ring {
+  background-color: black;
+}
+
+.kuldne-ring {
+  background-color: goldenrod;
+}
+
+.sinine-ring {
+  background-color: blue;
+}
+
+.punane-ring {
+  background-color: red;
+}
+
+.lilla-ring {
+  background-color: purple;
+}
+
+/* .must-ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.kuldne-ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: goldenrod;
+}
+
+.sinine-ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: blue;
+}
+
+.punane-ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.lilla-ring {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: purple;
+} */
+
+.aktiivne {
+  text-decoration: undeline;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+}

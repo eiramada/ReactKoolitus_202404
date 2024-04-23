@@ -52,7 +52,7 @@ function Tootajad() {
   }
 
   function sortKasv() {
-    tootajad.sort((a, b) => a.length - b.length); //tahab saada - / + märki, mitte true/false
+    tootajad.sort((a, b) => a.length - b.length); //tahab saada -/+ märki, mitte true/false
 
     muudaTootajad(tootajad.slice());
   }
@@ -67,8 +67,17 @@ function Tootajad() {
     muudaTootajad(tootajad.slice());
   }
 
+  function sortTeineTähtAZ() {
+    tootajad.sort((a, b) => a[1].localeCompare(b[1]));
+    muudaTootajad(tootajad.slice());
+  }
+
   function filteeriAllaViis() {
     const result = tootajad.filter((nimi) => nimi.length < 5);
+    muudaTootajad(result);
+  }
+  function filteeriÜleViis() {
+    const result = tootajad.filter((nimi) => nimi.length > 5);
     muudaTootajad(result);
   }
 
@@ -77,28 +86,90 @@ function Tootajad() {
     muudaTootajad(result);
   }
 
-  //sorteeri:
-  // teine täht a-z.
+  function filtreeriM() {
+    const result = tootajad.filter((nimi) => nimi.startsWith("M") === true);
+    muudaTootajad(result);
+  }
 
-  //filtreeri
-  //1. täpselt kolmetähelised jäta alles
-  //2.jäta alles 5-tähelised
-  //3. jäta alles "ai" sisaldavad
-  //4. kellel on kolmas täht "i"
-  //5. 'M' tähega algav.
-  //6. paarisarv tähti
+  function filtreeriI() {
+    const result = tootajad.filter((nimi) => nimi[2] === "i");
+    muudaTootajad(result);
+  }
+
+  function filteeriKolm() {
+    const result = tootajad.filter((nimi) => nimi.length === 3);
+    muudaTootajad(result);
+  }
+
+  function filtreeriAI() {
+    const result = tootajad.filter((nimi) => nimi.includes("ai") === true);
+    muudaTootajad(result);
+  }
+
+  function filtreeriPaarisTähti() {
+    const result = tootajad.filter((nimi) => nimi.length % 2 === 0);
+    muudaTootajad(result);
+  }
 
   return (
     <div>
-      <button onClick={reset}>Reset</button>
-      <button onClick={sortAZ}>Sorteeri A-Z</button>
-      <button onClick={sortZA}>sorteeri z-a</button>
-      <button onClick={sortKasv}>sorteeri kasvavalt</button>
-      <button onClick={sortKahan}>sorteeri kahanevalt</button>
-      <button onClick={sortKolmasTähtAZ}>sorteeri kolmanda tähe järgi</button>
-      <button onClick={filteeriAllaViis}>vähem kui 5 tähte</button>
-      <button onClick={filtreeriK}>K tähega algavad</button>
-      <div>Töötajate koguarv: {tootajad.length}</div>
+      <button className="button" onClick={reset}>
+        Reset
+      </button>
+      <button className="button" onClick={sortAZ}>
+        sort A-Z
+      </button>
+      <button className="button" onClick={sortZA}>
+        sort z-a
+      </button>
+      <button className="button" onClick={sortKasv}>
+        <img
+          className="buttonImg"
+          src="sort_asc.png"
+          alt=""
+          title="sort ascending"
+        />
+      </button>
+      <button className="button" onClick={sortKahan}>
+        <img
+          className="buttonImg"
+          src="sort_desc.png"
+          alt=""
+          title="sort descending"
+        />
+      </button>
+      <button className="button" onClick={sortKolmasTähtAZ}>
+        sort 3. tähe järgi
+      </button>
+      <button className="button" onClick={sortTeineTähtAZ}>
+        sort 2. tähe järgi
+      </button>
+      <button className="button" onClick={filteeriAllaViis}>
+        vähem kui 5
+      </button>
+      <button className="button" onClick={filteeriÜleViis}>
+        rohkem kui 5
+      </button>
+      <button className="button" onClick={filtreeriK}>
+        "K" tähega algavad
+      </button>
+      <button className="button" onClick={filtreeriM}>
+        "M" tähega algavad
+      </button>
+      <button className="button" onClick={filtreeriI}>
+        3. täht "i"
+      </button>
+      <button className="button" onClick={filteeriKolm}>
+        3-tähelised
+      </button>
+      <button className="button" onClick={filtreeriAI}>
+        "ai" nimes
+      </button>
+      <button className="button" onClick={filtreeriPaarisTähti}>
+        paaris arv tähti nimes
+      </button>
+
+      <div>Töötajate arv: {tootajad.length}</div>
       {tootajad.map((t) => (
         <div key={t}> {t} </div>
       ))}

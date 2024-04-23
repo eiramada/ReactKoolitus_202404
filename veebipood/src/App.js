@@ -22,7 +22,7 @@ export function App() {
   // kui mul oleks useState("false"), siis darkMode ? "App" ... puhul oleks alati true, sest see kontrollib,
   // kas jutumärkide sees midagigi on.
 
-  //localStorage's on alati sõn
+  //localStorage's on alati sõnad
 
   function toLightMode() {
     setDarkMode(false);

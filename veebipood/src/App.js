@@ -14,6 +14,10 @@ import Ostukorv from "./pages/Ostukorv";
 import Seaded from "./pages/Seaded";
 import Tootajad from "./pages/Tootajad";
 import Tooted from "./pages/Tooted";
+import HaldaTootajad from "./pages/HaldaTootajad";
+import HaldaEsindused from "./pages/HaldaEsindused";
+import HaldaHinnad from "./pages/HaldaHinnad";
+import HaldaTooted from "./pages/HaldaTooted";
 
 export function App() {
   const [darkMode, setDarkMode] = useState(
@@ -71,6 +75,10 @@ export function App() {
         <Route path="tooted" element={<Tooted />}></Route>
         <Route path="hinnad" element={<Hinnad />}></Route>
         <Route path="tootajad" element={<Tootajad />}></Route>
+        <Route path="halda-tootajad" element={<HaldaTootajad />}></Route>
+        <Route path="halda-esindused" element={<HaldaEsindused />}></Route>
+        <Route path="halda-hinnad" element={<HaldaHinnad />}></Route>
+        <Route path="halda-tooted" element={<HaldaTooted />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {/* <div>

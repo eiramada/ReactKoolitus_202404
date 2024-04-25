@@ -1,49 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import ostukorvFailist from "../data/ostukorv.json";
 
 function Ostukorv() {
-  const joogiNimekiri = ["coca", "fanta", "sprite", "red bull"];
+  const [tooted, muudaToodet] = useState(ostukorvFailist.slice());
+  const [sonum, muudaSonum] = useState("");
 
-  const [joogid, muudaJooke] = useState(joogiNimekiri);
+  const reset = () => {
+    ostukorvFailist.splice(0) //1 esimeses tootest kuni lõpuni tühjendab
+    muudaToodet(ostukorvFailist.slice());
+    muudaSonum("Ostukorv on tühi");
+  };
 
-  function reset() {
-    muudaJooke(joogiNimekiri);
-  }
+  // const kustutaEsimene = () => {
+  //   tooted.splice(0, 1); // 0 - mitmendat, 1 - mitu // kustutamiseks
+  //   muudaToodet(tooted.splice()) //HTMLi uuenduseks
+  // };
 
-  function tühjenda() {
-    muudaJooke([]);
-  }
+  // const kustutaTeine = () => {
+  //   tooted.splice(1, 1);
+  //   muudaToodet(tooted.slice());
+  // };
 
-  function lisaOstukorvi(j) {
-    if (!joogid.includes(j)) {
-      muudaJooke((prevJoogid) => [...prevJoogid, j]);
-    }
-  }
+  // const kustutaKolmas = () => {
+  //   tooted.splice(2, 1);
+  //   muudaToodet(tooted.slice());
+  // };
+
+  const kustuta = (jrknr) => {
+    ostukorvFailist.splice(jrknr, 1);
+    muudaToodet(ostukorvFailist.slice()); //tooted ei muutu selles hetkes HTMLis, aga kui db tuleb mängu, siis vb oleks vaja tooted.slice() kasutada
+  };
+
+  const lisaVichy = () => {
+    ostukorvFailist.push("Vichy");
+    muudaToodet(ostukorvFailist.slice());
+  };
+
+  const lisa = (toode) => {
+    ostukorvFailist.push(toode);
+    muudaToodet(ostukorvFailist.slice());
+  };
 
   return (
     <div>
-      <Link to="/avaleht">
-        <button>Avalehele</button> <br />
-      </Link>
-      {/* <button onClick={reset}>Reset</button> */}
-
+      <Link to="/avaleht">Mine avalehele</Link>
+      <br />
+      <br />
+      <div>{sonum}</div>
       <div>
-        {joogiNimekiri.map((j) => (
-          <button
-            disabled={joogid.includes(j)}
-            key={j}
-            onClick={() => lisaOstukorvi(j)}>
-            {j}
-          </button>
+        <button className="nuppReset" onClick={reset}>
+          Tühjenda ostukorv
+        </button>
+        {/* <button onClick={kustutaTeine}>Kustuta 2. </button> */}
+        <button onClick={lisaVichy}>Lisa Vichy</button>
+        <button onClick={() => lisa("Vitamin Well")}>Lisa Vitamin Well</button>
+        <span className="vastusText">Ostukorvis olevate esemete arv:</span>{" "}
+        {tooted.length} <span className="vastusText">tk</span>
+        <br />
+        {tooted.map((t, index) => (
+          <div key={index}>
+            {t}
+            {/* panin algselt kustuta({index}) ja see on tegelt objekt, aga tahtsin hoopis numbri saata kaasa */}
+            <button onClick={() => kustuta(index)}>x</button>
+            <button onClick={() => lisa(t)}>Lisa lõppu juurde</button>
+          </div>
         ))}
       </div>
-      <div>Toodete arv ostukorvis: {joogid.length}</div>
-
-      {joogid.length === 0 ? (
-        <div>Ostukorv on tühi</div>
-      ) : (
-        <button onClick={tühjenda}>Tühjenda ostukorv</button>
-      )}
     </div>
   );
 }

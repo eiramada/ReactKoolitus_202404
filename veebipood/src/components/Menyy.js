@@ -11,11 +11,9 @@ function Menyy() {
           alt=""
         />
       </Link>
-
       <Link to="/osta-kinkekaart">
         <button className="Nupp">Kinkekaart</button>
       </Link>
-
       <Link to="/esindused">
         <button className="Nupp">Esindused</button>
       </Link>
@@ -25,11 +23,6 @@ function Menyy() {
       <Link to="/ostukorv">
         <button className="Nupp">Ostukorv</button>
       </Link>
-
-      <Link to="/lisa-toode">
-        <button className="Nupp">Lisa toode</button>
-      </Link>
-
       <Link to="/seaded">
         <button className="Nupp">Seaded</button>
       </Link>
@@ -41,6 +34,22 @@ function Menyy() {
       </Link>
       <Link to="/tootajad">
         <button className="Nupp">Töötajad</button>
+      </Link>
+      <br /> <br />
+      <Link to="/lisa-toode">
+        <button className="Nupp">Lisa toode</button>
+      </Link>
+      <Link to="/halda-esindused">
+        <button className="Nupp">Halda Esindused</button>
+      </Link>
+      <Link to="/halda-tooted">
+        <button className="Nupp">Halda Tooted</button>
+      </Link>
+      <Link to="/halda-hinnad">
+        <button className="Nupp">Halda Hindu</button>
+      </Link>
+      <Link to="/halda-tootajad">
+        <button className="Nupp">Halda Töötajad</button>
       </Link>
     </div>
   );

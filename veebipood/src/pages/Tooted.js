@@ -1,71 +1,71 @@
-import React, { useState } from "react";
-
-const autod = ["Nobe", "BMW", "Tesla", "Saab", "Opel"];
+import React from "react";
+import { useState } from "react";
+import ostukorvFailist from "../data/ostukorv.json";
+import tootedFailist from "../data/tooted.json"
 
 function Tooted() {
-  const [tooted, muudaTooted] = useState(autod);
+  const [tooted, muudaTooted] = useState(tootedFailist.slice());
 
-  function reset() {
-    muudaTooted(autod);
-  }
-
-  function sortAZ() {
-    tooted.sort();
+  const sorteeriAZ = () => {
+    tooted.sort((a, b) => a.localeCompare(b));
     muudaTooted(tooted.slice());
-  }
+  };
 
-  function sortZA() {
+  const sorteeriZA = () => {
     tooted.sort((a, b) => b.localeCompare(a));
     muudaTooted(tooted.slice());
-  }
+  };
 
-  function sortAsc() {
+  const sorteeriTahemargidVaiksemast = () => {
     tooted.sort((a, b) => a.length - b.length);
     muudaTooted(tooted.slice());
-  }
+  };
 
-  function sortDesc() {
+  const sorteeriTahemargidKah = () => {
     tooted.sort((a, b) => b.length - a.length);
     muudaTooted(tooted.slice());
-  }
+  };
 
-  function sort3Täht() {
+  const sorteeriKolmasTähtAZ = () => {
     tooted.sort((a, b) => a[2].localeCompare(b[2]));
     muudaTooted(tooted.slice());
-  }
+  };
+
+  const lisa = (toode) => {
+    ostukorvFailist.push(toode);
+    alert("Edukalt lisatud " + toode);
+  };
 
   return (
-    //tähtede arv kasvavalt
-    //tähtede arv kahanevealt
-    //sorteeri kolmanda tähe järgi tähestiku järjekorras.
-
     <div>
-      <button onClick={reset}>reset</button>
-      <button onClick={sortAZ}>sort AZ</button>
-      <button onClick={sortZA}>sort ZA</button>
-      <button className="button" onClick={sortAsc}>
-        <img
-          className="buttonImg"
-          src="sort_asc.png"
-          alt=""
-          title="sort ascending"
-        />
+      <br />
+      <button className="nuppFilter" onClick={sorteeriAZ}>
+        Sorteeri A-Z
       </button>
-
-      <button className="button" onClick={sortDesc}>
-        <img
-          className="buttonImg"
-          src="sort_desc.png"
-          alt=""
-          title="sort descending"
-        />
+      <button className="nuppFilter" onClick={sorteeriZA}>
+        Sorteeri Z-A
       </button>
-      <button onClick={sort3Täht}>3. tähe järgi</button>
-
-      <div>Toodete arv: {tooted.length}</div>
+      <button className="nuppFilter" onClick={sorteeriTahemargidVaiksemast}>
+        Sorteeri tähemärgid kasvavalt
+      </button>
+      <button className="nuppFilter" onClick={sorteeriTahemargidKah}>
+        Sorteeri tähemärgid kahanevalt
+      </button>
+      <button className="nuppFilter" onClick={sorteeriKolmasTähtAZ}>
+        Sorteeri kolmandast tähest A-Z
+      </button>
+      <br />
+      <br />
       <div>
+        <span className="vastusText">Töödete koguarv:</span> {tooted.length}{" "}
+        <span className="vastusText">tk</span>
+        <br />
+        <br />
         {tooted.map((t) => (
-          <div key={t}>{t}</div>
+          <div>
+            {t}
+            <button onClick={() => lisa(t)}>Lisa ostukorvi</button>
+          </div>
         ))}
       </div>
     </div>

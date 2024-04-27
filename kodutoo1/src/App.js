@@ -5,8 +5,12 @@ import "./App.css";
 import Avaleht from "./pages/Avaleht";
 import Kontakt from "./pages/Kontakt";
 import Leht from "./pages/Leht";
+import Logimine from "./pages/Logimine";
 import Meist from "./pages/Meist";
 import Seaded from "./pages/Seaded";
+import Animals from "./pages/animals";
+import Months from "./pages/months";
+import Words from "./pages/Words";
 
 function App() {
   const [sisseLogitud, muudaSisselogitud] = useState("ei");
@@ -83,6 +87,20 @@ function App() {
       <Link to="/leht">
         <button>leht</button>
       </Link>
+      <Link to="/logimine">
+        <button>Logimine</button>
+      </Link>
+
+      <Link to="/months">
+        <button>Months</button>
+      </Link>
+      <Link to="/animals">
+        <button>Animals</button>
+      </Link>
+
+      <Link to="/words">
+        <button>Words</button>
+      </Link>
 
       <Routes>
         <Route path="/" element={<Navigate to="/avaleht" />}></Route>
@@ -91,6 +109,10 @@ function App() {
         <Route path="/kontakt" element={<Kontakt />}></Route>
         <Route path="/seaded" element={<Seaded />}></Route>
         <Route path="/leht" element={<Leht />}></Route>
+        <Route path="/logimine" element={<Logimine />}></Route>
+        <Route path="/months" element={<Months />}></Route>
+        <Route path="/animals" element={<Animals />}></Route>
+        <Route path="/words" element={<Words />}></Route>
       </Routes>
       <button className="Nupp">Nupp</button>
       <p className="Tekst1">Tekst</p>

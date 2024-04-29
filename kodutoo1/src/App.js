@@ -3,14 +3,15 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "./App.css";
 import Avaleht from "./pages/Avaleht";
+import Books from "./pages/books";
 import Kontakt from "./pages/Kontakt";
 import Leht from "./pages/Leht";
 import Logimine from "./pages/Logimine";
 import Meist from "./pages/Meist";
 import Seaded from "./pages/Seaded";
+import Words from "./pages/Words";
 import Animals from "./pages/animals";
 import Months from "./pages/months";
-import Words from "./pages/Words";
 
 function App() {
   const [sisseLogitud, muudaSisselogitud] = useState("ei");
@@ -83,25 +84,25 @@ function App() {
       <Link to="/seaded">
         <button>Seaded</button>
       </Link>
-
       <Link to="/leht">
         <button>leht</button>
       </Link>
       <Link to="/logimine">
         <button>Logimine</button>
       </Link>
-
       <Link to="/months">
         <button>Months</button>
       </Link>
       <Link to="/animals">
         <button>Animals</button>
       </Link>
-
       <Link to="/words">
         <button>Words</button>
       </Link>
-
+      <Link to="/books">
+        <button>Books</button>
+      </Link>
+      
       <Routes>
         <Route path="/" element={<Navigate to="/avaleht" />}></Route>
         <Route path="/avaleht" element={<Avaleht />}></Route>
@@ -113,7 +114,10 @@ function App() {
         <Route path="/months" element={<Months />}></Route>
         <Route path="/animals" element={<Animals />}></Route>
         <Route path="/words" element={<Words />}></Route>
+        <Route path="/books" element={<Books />}></Route>
       </Routes>
+      <br />
+      <p>------------- Varasem kodutöö: -------------</p>   
       <button className="Nupp">Nupp</button>
       <p className="Tekst1">Tekst</p>
       <p className="Tekst2">Text</p>
@@ -164,14 +168,12 @@ function App() {
           </tr>
         </tbody>
       </table>
-
       <iframe
         width="560"
         height="315"
         src="https://www.youtube.com/embed/D0MxmDWk4t0?si=Cr83tR6ovZO-2dGa"
         title="YouTube video player"
       ></iframe>
-
       <ToastContainer position="bottom-right" autoClose={4000} />
     </div>
   );

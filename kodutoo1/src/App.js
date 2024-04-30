@@ -12,6 +12,7 @@ import Seaded from "./pages/Seaded";
 import Words from "./pages/Words";
 import Animals from "./pages/animals";
 import Months from "./pages/months";
+import Numbrid from "./pages/numbrid";
 
 function App() {
   const [sisseLogitud, muudaSisselogitud] = useState("ei");
@@ -102,6 +103,10 @@ function App() {
       <Link to="/books">
         <button>Books</button>
       </Link>
+
+      <Link to="/numbrid">
+        <button>Numbrid</button>
+      </Link>
       
       <Routes>
         <Route path="/" element={<Navigate to="/avaleht" />}></Route>
@@ -115,6 +120,7 @@ function App() {
         <Route path="/animals" element={<Animals />}></Route>
         <Route path="/words" element={<Words />}></Route>
         <Route path="/books" element={<Books />}></Route>
+        <Route path="/numbrid" element={<Numbrid />}></Route>
       </Routes>
       <br />
       <p>------------- Varasem kodutöö: -------------</p>   

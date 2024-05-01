@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+.joogid__row {
+  display: flex;
+  justify-content: left;
+}
+
+.joogid__name {
+  margin: 0;
+  padding: 0;
+}

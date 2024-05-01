@@ -1,0 +1,9 @@
+.tagasiside__row {
+    display: flex;
+    justify-content: left;
+}
+
+.tagasisided__name {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,14 @@
+.drop-down {
+    max-width: 200px;
+    border-radius: 5px;
+}
+
+.tagasiside-andja__row {
+    display: flex;
+    justify-content: left;
+}
+
+.tagasiside-andja__name {
+    margin: 0;
+    padding: 0;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import hinnadJSON from "../data/hinnad.json";
+import { Link } from "react-router-dom";
 
 function Hinnad() {
   const [hinnad, muudaHinnad] = useState(hinnadJSON.slice()); //võtame ainult mälukoha, et sort/filtreerimine sort/filtr ka HaldaHinnad.js-s
@@ -23,8 +24,15 @@ function Hinnad() {
     muudaHinnad(result);
   }
 
+  function kokku() {
+    let summa = 0;
+    hinnad.forEach((h) => (summa = summa + h));
+    return summa;
+  }
+
   return (
     <div>
+      <div>Hinnasumma: {kokku()} €</div>
       <div>Mitu toodet on hinnastatud: {hinnad.length} tk</div>
       <button onClick={originaal}>Originaal</button>
       <button onClick={() => muudaHinnad([])}>Kustuta kõik</button>
@@ -34,7 +42,9 @@ function Hinnad() {
 
       <div>
         {hinnad.map((hind, index) => (
-          <div key={index}>{hind}€</div>
+          <div key={index}>
+            {hind}€<Link to={"/hind/" + index}>Vaata lähemalt</Link>
+          </div>
         ))}
       </div>
     </div>

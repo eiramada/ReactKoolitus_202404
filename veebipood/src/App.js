@@ -6,18 +6,26 @@ import Menyy from "./components/Menyy";
 import Ariklient from "./pages/Ariklient";
 import Avaleht from "./pages/Avaleht";
 import Esindused from "./pages/Esindused";
+import HaldaEsindused from "./pages/HaldaEsindused";
+import HaldaHinnad from "./pages/HaldaHinnad";
+import HaldaTootajad from "./pages/HaldaTootajad";
+import HaldaTooted from "./pages/HaldaTooted";
 import Hinnad from "./pages/Hinnad";
 import Kinkekaart from "./pages/Kinkekaart";
 import Lisatoode from "./pages/LisaToode";
+import MuudaEsindus from "./pages/MuudaEsindus";
+import MuudaHind from "./pages/MuudaHind";
+import MuudaToode from "./pages/MuudaToode";
+import MuudaTootaja from "./pages/MuudaTootaja";
 import NotFound from "./pages/NotFound";
 import Ostukorv from "./pages/Ostukorv";
 import Seaded from "./pages/Seaded";
 import Tootajad from "./pages/Tootajad";
 import Tooted from "./pages/Tooted";
-import HaldaTootajad from "./pages/HaldaTootajad";
-import HaldaEsindused from "./pages/HaldaEsindused";
-import HaldaHinnad from "./pages/HaldaHinnad";
-import HaldaTooted from "./pages/HaldaTooted";
+import YksEsindus from "./pages/YksEsindus";
+import YksHind from "./pages/YksHind";
+import YksToode from "./pages/YksToode";
+import YksTootaja from "./pages/YksTootaja";
 
 export function App() {
   const [darkMode, setDarkMode] = useState(
@@ -79,6 +87,14 @@ export function App() {
         <Route path="halda-esindused" element={<HaldaEsindused />}></Route>
         <Route path="halda-hinnad" element={<HaldaHinnad />}></Route>
         <Route path="halda-tooted" element={<HaldaTooted />}></Route>
+        <Route path="toode/:index" element={<YksToode />}></Route>
+        <Route path="hind/:index" element={<YksHind />}></Route>
+        <Route path="tootaja" element={<YksTootaja />}></Route>
+        <Route path="esindus" element={<YksEsindus />}></Route>
+        <Route path="muuda-hind/:index" element={<MuudaHind />}></Route>
+        <Route path="muuda-esindus/:index" element={<MuudaEsindus />}></Route>
+        <Route path="muuda-toode/:index" element={<MuudaToode />}></Route>
+        <Route path="muuda-tootaja/:index" element={<MuudaTootaja />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {/* <div>
@@ -88,6 +104,10 @@ export function App() {
   );
 }
 export default App;
+
+// Firebase-i üleslaadimiseks on vaja:
+// npm run build
+// firebase deploy
 
 // Sedasi peaks kaasaegne React-Router olema seadistatud vastavalt reactrouter.com soovitustele. See, mis seal varem oli, on ka toimiv, aga see ilmselt kaob mingi aja pärast ära.
 // export const router = createBrowserRouter([

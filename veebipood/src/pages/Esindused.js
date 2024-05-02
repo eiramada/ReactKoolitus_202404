@@ -7,7 +7,7 @@ function Esindused() {
   // let linn = "Tallinn"; //tavaline js teeb nii, ei uuenda htmli
 
   const [linn, muudaLinn] = useState("Tallinn"); //React teeb nii, vahetab olekuid
-  const [keskused, muudaKeskused] = useState([
+  const [keskused] = useState([
     "Ülemiste",
     "Rocca al Mare",
     "Magistrali",

@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ostukorvFailist from "../data/ostukorv.json";
-import tootedFailist from "../data/tooted.json"
+import tootedFailist from "../data/tooted.json";
 
 function Tooted() {
   const [tooted, muudaTooted] = useState(tootedFailist.slice());
@@ -61,10 +61,12 @@ function Tooted() {
         <span className="vastusText">tk</span>
         <br />
         <br />
-        {tooted.map((t) => (
+        {tooted.map((t, index) => (
           <div>
             {t}
             <button onClick={() => lisa(t)}>Lisa ostukorvi</button>
+             <Link to={"/toode/" + index}> Vaata lähemalt
+            </Link>
           </div>
         ))}
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function Tootajad() {
+  //pane const enamasti. kui ma tahan muuta muutujat, siis erandkorras let -> käe sees võiks olla const
   const [tootajad, muudaTootajad] = useState([
     "Urmet",
     "Kaido",
@@ -111,8 +112,15 @@ function Tootajad() {
     muudaTootajad(result);
   }
 
+  const kokku = () => {
+    let summa = 0;
+    tootajad.forEach((t) => (summa = summa + t.length));
+    return summa;
+  };
+
   return (
     <div>
+      <div>Tähemärgid kokku {kokku()}</div>
       <button className="button" onClick={reset}>
         Reset
       </button>

@@ -1,13 +1,14 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import hinnadJSON from "../data/hinnad.json";
 
 function HaldaHinnad() {
   const [hinnad, muudaHinnad] = useState(hinnadJSON);
   const hindRef = useRef();
 
-  const sort = () => {
-    hinnad.sort(); //tahan sorteerimist näha ainult HaldaHinnad lehel.
-  };
+  // const sort = () => {
+  //   hinnad.sort(); //tahan sorteerimist näha ainult HaldaHinnad lehel.
+  // };
 
   const kustuta = (index) => {
     // hinnad.splice(index, 1);
@@ -42,6 +43,9 @@ function HaldaHinnad() {
           <div key={index}>
             {hind}€<button onClick={() => kustuta(index)}>x</button>
             <button onClick={() => lisa(hind)}>lisa lõppu</button>
+            <Link to={"/muuda-hind/" + index}>
+              <button>Muuda</button>
+            </Link>
           </div>
         ))}
       </div>

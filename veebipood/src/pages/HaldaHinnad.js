@@ -31,7 +31,7 @@ function HaldaHinnad() {
     <div>
       <button onClick={() => lisa(Math.floor(Math.random() * (200 - 2) + 2))}>
         Lisa random
-      </button>{" "}
+      </button>
       <br />
       <label>Uus Hind</label> <br />
       <input ref={hindRef} type="text" /> <br />

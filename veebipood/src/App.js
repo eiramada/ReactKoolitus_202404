@@ -89,10 +89,10 @@ export function App() {
         <Route path="halda-tooted" element={<HaldaTooted />}></Route>
         <Route path="toode/:index" element={<YksToode />}></Route>
         <Route path="hind/:index" element={<YksHind />}></Route>
-        <Route path="tootaja" element={<YksTootaja />}></Route>
-        <Route path="esindus" element={<YksEsindus />}></Route>
+        <Route path="tootaja/:index" element={<YksTootaja />}></Route>
+        <Route path="esindus/:linn/:index" element={<YksEsindus />}></Route>
         <Route path="muuda-hind/:index" element={<MuudaHind />}></Route>
-        <Route path="muuda-esindus/:index" element={<MuudaEsindus />}></Route>
+        <Route path="muuda-esindus/:linn/:index" element={<MuudaEsindus />}></Route>
         <Route path="muuda-toode/:index" element={<MuudaToode />}></Route>
         <Route path="muuda-tootaja/:index" element={<MuudaTootaja />}></Route>
         <Route path="*" element={<NotFound />}></Route>

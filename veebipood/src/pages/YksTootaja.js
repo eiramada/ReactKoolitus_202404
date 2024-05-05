@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
+import töötajad from "../data/tootajad.json";
 
 function YksTootaja() {
+  const { index } = useParams();
+  const töötaja = töötajad[index];
+
   return (
-    <div>YksTootaja</div>
-  )
+    <div>
+      <div key={index}> Töötaja  {töötaja} </div>
+    </div>
+  );
 }
 
-export default YksTootaja
+export default YksTootaja;

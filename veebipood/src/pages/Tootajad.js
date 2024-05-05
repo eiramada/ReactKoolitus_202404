@@ -1,31 +1,13 @@
 import React, { useState } from "react";
+import töötajad from "../data/tootajad.json";
+import { Link } from "react-router-dom";
 
 function Tootajad() {
   //pane const enamasti. kui ma tahan muuta muutujat, siis erandkorras let -> käe sees võiks olla const
-  const [tootajad, muudaTootajad] = useState([
-    "Urmet",
-    "Kaido",
-    "Liina",
-    "Maiki",
-    "Heidi",
-    "Epp",
-    "Kaire",
-    "Anet",
-    "Maarja",
-  ]);
+  const [tootajad, muudaTootajad] = useState(töötajad);
 
   function reset() {
-    muudaTootajad([
-      "Urmet",
-      "Kaido",
-      "Liina",
-      "Maiki",
-      "Heidi",
-      "Epp",
-      "Kaire",
-      "Anet",
-      "Maarja",
-    ]);
+    muudaTootajad(töötajad);
   }
 
   function sortAZ() {
@@ -124,62 +106,69 @@ function Tootajad() {
       <button className="button" onClick={reset}>
         Reset
       </button>
-      <button className="button" onClick={sortAZ}>
-        sort A-Z
-      </button>
-      <button className="button" onClick={sortZA}>
-        sort z-a
-      </button>
-      <button className="button" onClick={sortKasv}>
-        <img
-          className="buttonImg"
-          src="sort_asc.png"
-          alt=""
-          title="sort ascending"
-        />
-      </button>
-      <button className="button" onClick={sortKahan}>
-        <img
-          className="buttonImg"
-          src="sort_desc.png"
-          alt=""
-          title="sort descending"
-        />
-      </button>
-      <button className="button" onClick={sortKolmasTähtAZ}>
-        sort 3. tähe järgi
-      </button>
-      <button className="button" onClick={sortTeineTähtAZ}>
-        sort 2. tähe järgi
-      </button>
-      <button className="button" onClick={filteeriAllaViis}>
-        vähem kui 5
-      </button>
-      <button className="button" onClick={filteeriÜleViis}>
-        rohkem kui 5
-      </button>
-      <button className="button" onClick={filtreeriK}>
-        "K" tähega algavad
-      </button>
-      <button className="button" onClick={filtreeriM}>
-        "M" tähega algavad
-      </button>
-      <button className="button" onClick={filtreeriI}>
-        3. täht "i"
-      </button>
-      <button className="button" onClick={filteeriKolm}>
-        3-tähelised
-      </button>
-      <button className="button" onClick={filtreeriAI}>
-        "ai" nimes
-      </button>
-      <button className="button" onClick={filtreeriPaarisTähti}>
-        paaris arv tähti nimes
-      </button>
+      <div>
+        <button className="button" onClick={sortAZ}>
+          sort A-Z
+        </button>
+        <button className="button" onClick={sortZA}>
+          sort z-a
+        </button>
+        <button className="button" onClick={sortKasv}>
+          <img
+            className="buttonImg"
+            src="sort_asc.png"
+            alt=""
+            title="sort ascending"
+          />
+        </button>
+        <button className="button" onClick={sortKahan}>
+          <img
+            className="buttonImg"
+            src="sort_desc.png"
+            alt=""
+            title="sort descending"
+          />
+        </button>
+        <button className="button" onClick={sortKolmasTähtAZ}>
+          sort 3. tähe järgi
+        </button>
+        <button className="button" onClick={sortTeineTähtAZ}>
+          sort 2. tähe järgi
+        </button>
+      </div>
+      <div>
+        <button className="button" onClick={filteeriAllaViis}>
+          vähem kui 5
+        </button>
+        <button className="button" onClick={filteeriÜleViis}>
+          rohkem kui 5
+        </button>
+        <button className="button" onClick={filtreeriK}>
+          "K" tähega algavad
+        </button>
+        <button className="button" onClick={filtreeriM}>
+          "M" tähega algavad
+        </button>
+        <button className="button" onClick={filtreeriI}>
+          3. täht "i"
+        </button>
+        <button className="button" onClick={filteeriKolm}>
+          3-tähelised
+        </button>
+        <button className="button" onClick={filtreeriAI}>
+          "ai" nimes
+        </button>
+        <button className="button" onClick={filtreeriPaarisTähti}>
+          paaris arv tähti nimes
+        </button>
+      </div>
 
       <div>Töötajate arv: {tootajad.length}</div>
-      {tootajad.map((t) => (
-        <div key={t}> {t} </div>
+      {tootajad.map((t, index) => (
+        <div key={t}>
+          {t}
+          <Link to={"/tootaja/" + index}>Vaata lähemalt</Link>
+        </div>
       ))}
     </div>
   );

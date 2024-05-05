@@ -2,37 +2,65 @@
 //ffc on vanem versioon, millega tuleb natukene veel käsitööd.
 
 import React, { useState } from "react";
+import esindused from "../data/keskused.json";
+import { Link } from "react-router-dom";
 
 function Esindused() {
   // let linn = "Tallinn"; //tavaline js teeb nii, ei uuenda htmli
 
-  const [linn, muudaLinn] = useState("Tallinn"); //React teeb nii, vahetab olekuid
-  const [keskused] = useState([
-    "Ülemiste",
-    "Rocca al Mare",
-    "Magistrali",
-    "Vesse",
-    "Kristiine",
-    "Järveotsa",
-  ]);
+  const [linn, muudaLinn] = useState("Tallinn");
+  const [keskused, setKeskused] = useState(esindused[linn]);
+  const linnad = Object.keys(esindused);
 
-//keskuste koguarv
+  const changeCity = (newCity) => {
+    muudaLinn(newCity);
+    setKeskused(esindused[newCity]);
+  };
 
- // 1. Sorteeri A-Z
-  // 2. Sorteeri Z-A
-  // 3. Sorteeri tähtede arv kasvavalt
-  // 4. Sorteeri tähtede arv kahanevalt
-  // 5. Sorteeri kolmas täht A-Z
+  function sortAZ() {
+    keskused.sort();
+    setKeskused(keskused.slice());
+  }
 
-  // 1. Filtreeri kellel on täpselt 9 tähte
-  // 2. Filtreeri kellel on vähemalt 7 tähte
-  // 3. Filtreeri kellel on lühend "is"
-  // 4. Filtreeri kellel on kolmas täht "i"
-  // 5. Filtreeri kes lõppeb "e" tähega
+  function sortZA() {
+    keskused.sort((a, b) => b.localeCompare(a));
+    setKeskused(keskused.slice());
+  }
 
-  // 1. Tühjenda
-  // 2. Võimalda teda ajutiselt kustutada
-  // 3. Võimalda teda lõppu juurde lisada
+  function sortKasv() {
+    keskused.sort((a, b) => a.length - b.length);
+    setKeskused(keskused.slice());
+  }
+
+  function sortKahan() {
+    keskused.sort((a, b) => b.length - a.length);
+    setKeskused(keskused.slice());
+  }
+
+  function sortKolmasTähtAZ() {
+    keskused.sort((a, b) => a[2].localeCompare(b[2]));
+    setKeskused(keskused.slice());
+  }
+
+  function filteeri9() {
+    const result = keskused.filter((nimi) => nimi.length === 9);
+    setKeskused(result);
+  }
+
+  function filteeriÜleSeitse() {
+    const result = keskused.filter((nimi) => nimi.length >= 7);
+    setKeskused(result);
+  }
+
+  function filtreeriIS() {
+    const result = keskused.filter((nimi) => nimi.includes("is") === true);
+    setKeskused(result);
+  }
+
+  function filtreeriE() {
+    const result = keskused.filter((nimi) => nimi.endsWith("e") === true);
+    setKeskused(result);
+  }
 
   return (
     <div>
@@ -41,51 +69,55 @@ function Esindused() {
       <button onClick={() => {linn="Tartu"}}>Tartu</button>
       <button onClick={() => {linn="Narva"}}>Narva</button>
       <button onClick={() => {linn="Pärnu"}}>Pärnu</button> */}
-
-      <div>Aktiivne linn: {linn} </div>
-
-      <button
-        className={linn === "Tallinn" ? "linn-aktiivne" : "linn"}
-        onClick={() => muudaLinn("Tallinn")}
-      >
-        Tallinn
-      </button>
-      <button
-        className={linn === "Tartu" ? "linn-aktiivne" : "linn"}
-        onClick={() => muudaLinn("Tartu")}
-      >
-        Tartu
-      </button>
-      <button
-        className={linn === "Narva" ? "linn-aktiivne" : "linn"}
-        onClick={() => muudaLinn("Narva")}
-      >
-        Narva
-      </button>
-      <button
-        className={linn === "Pärnu" ? "linn-aktiivne" : "linn"}
-        onClick={() => muudaLinn("Pärnu")}
-      >
-        Pärnu
-      </button>
-
-      {linn === "Tallinn" && (
-        <div>
-          {keskused.map((keskus) => (
-            <div key={keskus}>{keskus}</div>
-          ))}
-        </div>
-      )}
-
-      {linn === "Tartu" && (
-        <div>
-          <div>Raatuse</div>
-          <div>Lõunakeskus</div>
-        </div>
-      )}
-
-      {linn === "Narva" && <div>Fama</div>}
-      {linn === "Pärnu" && <div>Port Artur 2</div>}
+      <div>Aktiivne linn: {linn}</div>
+      {linnad.map((city, index) => (
+        <button
+          key={city}
+          className={linn === city ? "linn-aktiivne" : "linn"}
+          onClick={() => changeCity(city)}
+        >
+          {city}
+        </button>
+      ))}
+      <div>
+        {keskused.map((keskus, index) => (
+          <div key={index}>
+            {keskus}
+            <Link to={"/esindus/" + linn + "/" + index}>Vaata lähemalt</Link>
+          </div>
+        ))}
+      </div>{" "}
+      <br />
+      <div>Keskuste arv: {keskused.length}</div>
+      <div>
+        <button onClick={sortAZ}>sort AZ</button>
+        <button onClick={sortZA}>sort ZA</button>
+        <button className="button" onClick={sortKasv}>
+          <img
+            className="buttonImg"
+            src="sort_asc.png"
+            alt=""
+            title="sort ascending"
+          />
+        </button>
+        <button className="button" onClick={sortKahan}>
+          <img
+            className="buttonImg"
+            src="sort_desc.png"
+            alt=""
+            title="sort descending"
+          />
+        </button>
+        <button className="button" onClick={sortKolmasTähtAZ}>
+          sort 3. tähe järgi
+        </button>
+      </div>
+      <div>
+        <button onClick={filteeri9}>9-tähelised </button>
+        <button onClick={filteeriÜleSeitse}>vähemalt 7-tähelised </button>
+        <button onClick={filtreeriIS}>"is"</button>
+        <button onClick={filtreeriE}>Lõppeb e-ga</button>
+      </div>
     </div>
   );
 }

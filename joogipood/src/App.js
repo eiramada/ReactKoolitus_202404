@@ -1,48 +1,35 @@
-import { NavLink, Route, Routes } from "react-router-dom";
 import { useState } from "react";
-
+import { Link, Route, Routes } from "react-router-dom";
+import "./App.css";
+import joogid from "./data/joogid.json";
 import Avaleht from "./pages/Avaleht";
 import HaldaJooke from "./pages/HaldaJooke";
+import Jook from "./pages/Jook";
 import LisaJook from "./pages/LisaJook";
 
-import "./App.css";
-
 function App() {
-  const [joogid, setJoogid] = useState([
-    "Põltsamaa",
-    "Aura",
-    "Kadarbik",
-    "Saku",
-    "Värska",
-  ]);
+  const [joogidstate, setJoogid] = useState(joogid);
   return (
     <>
       <div className="App">
-        <NavLink to="/">
+        <Link to="/">
           <button>Avaleht</button>
-        </NavLink>
-        <NavLink to="/lisa">
+        </Link>
+        <Link to="/lisa">
           <button>Lisa jook</button>
-        </NavLink>
-        <NavLink to="/halda">
+        </Link>
+        <Link to="/halda">
           <button>Halda jooke</button>
-        </NavLink>
+        </Link>
+        <Link to="jook"></Link>
       </div>
       <div className="row">
         <div className="col">
           <Routes>
-            <Route
-              path="/"
-              element={<Avaleht setJoogid={setJoogid} joogid={joogid} />}
-            ></Route>
-            <Route
-              path="/lisa"
-              element={<LisaJook setJoogid={setJoogid} joogid={joogid} />}
-            ></Route>
-            <Route
-              path="/halda"
-              element={<HaldaJooke setJoogid={setJoogid} joogid={joogid} />}
-            ></Route>
+            <Route path="/" element={<Avaleht />}></Route>
+            <Route path="/lisa" element={<LisaJook />}></Route>
+            <Route path="/halda" element={<HaldaJooke />}></Route>
+            <Route path="/jook/:number" element={<Jook />}></Route>
           </Routes>
         </div>
       </div>

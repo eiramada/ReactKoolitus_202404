@@ -88,7 +88,7 @@ export function App() {
         <Route path="halda-hinnad" element={<HaldaHinnad />}></Route>
         <Route path="halda-tooted" element={<HaldaTooted />}></Route>
         <Route path="toode/:index" element={<YksToode />}></Route>
-        <Route path="hind/:index" element={<YksHind />}></Route>
+        <Route path="hind/:summa" element={<YksHind />}></Route>
         <Route path="tootaja/:index" element={<YksTootaja />}></Route>
         <Route path="esindus/:linn/:index" element={<YksEsindus />}></Route>
         <Route path="muuda-hind/:index" element={<MuudaHind />}></Route>

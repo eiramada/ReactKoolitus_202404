@@ -36,6 +36,8 @@ function LisaToode() {
     muudaSonum("");
   }
 
+  
+
   return (
     <div>
       <div>{sonum}</div> <br />

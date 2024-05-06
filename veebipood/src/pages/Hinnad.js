@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import hinnadJSON from "../data/hinnad.json";
+import hinnadObjektidJSON from "../data/hinnad.json";
 import { Link } from "react-router-dom";
 
 function Hinnad() {
-  const [hinnad, muudaHinnad] = useState(hinnadJSON.slice()); //võtame ainult mälukoha, et sort/filtreerimine sort/filtr ka HaldaHinnad.js-s
+  const hinnadJSON = hinnadObjektidJSON.map((h) => h.nr); //toimib ainult juhul, kui "klient" ei taha "lisajat" ka. kui tahab, siis potentsiaalselt ma hakkan teist korda db-st uurima, ja see on jama.
+  const [hinnad, muudaHinnad] = useState(hinnadJSON); //võtame ainult mälukoha, et sort/filtreerimine sort/filtr ka HaldaHinnad.js-s
 
   const originaal = () => {
     muudaHinnad(hinnadJSON.slice());
@@ -43,7 +44,8 @@ function Hinnad() {
       <div>
         {hinnad.map((hind, index) => (
           <div key={index}>
-            {hind}€<Link to={"/hind/" + index}>Vaata lähemalt</Link>
+            {/* {hind}€<Link to={"/hind/" + index}>Vaata lähemalt</Link> */}
+            {hind}€<Link to={"/hind/" + hind}>Vaata lähemalt</Link>
           </div>
         ))}
       </div>

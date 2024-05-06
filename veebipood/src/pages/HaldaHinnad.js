@@ -18,12 +18,21 @@ function HaldaHinnad() {
 
   const lisa = (hind) => {
     // hinnad.push(hind);
+    hind.lisaja = "Ada";
     hinnadJSON.push(hind);
     muudaHinnad(hinnad.slice());
   };
 
   const lisaHind = () => {
-    hinnadJSON.push(hindRef.current.value);
+    // const newHind = {
+    //   lisaja: "Ada",
+    //   nr: hindRef.current.value,
+    // };
+    // hinnadJSON.push(newHind);
+
+    hinnadJSON.push({ nr: hindRef.current.value, lisaja: "Kaarel" });
+
+    hinnadJSON.push();
     muudaHinnad(hinnadJSON.slice());
   };
 
@@ -41,7 +50,8 @@ function HaldaHinnad() {
       <div>
         {hinnadJSON.map((hind, index) => (
           <div key={index}>
-            {hind}€<button onClick={() => kustuta(index)}>x</button>
+            {hind.nr}€ - lisaja {hind.lisaja}{" "}
+            <button onClick={() => kustuta(index)}>x</button>
             <button onClick={() => lisa(hind)}>lisa lõppu</button>
             <Link to={"/muuda-hind/" + index}>
               <button>Muuda</button>

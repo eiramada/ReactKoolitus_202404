@@ -1,1 +1,7 @@
-["Nobe", "BMW", "Tesla", "Saab", "Opel"]
+[
+  { "nimi": "Nobe", "hind": 20000, "aktiivne": true, "pilt": "https://visionest.institute/wp-content/uploads/2023/07/i_6_NOBE-3.jpg" },
+  { "nimi": "BMW", "hind": 30000, "aktiivne": true, "pilt": "https://www.bmw-m.com/content/dam/bmw/marketBMW_M/www_bmw-m_com/all-models/model-navigation/bmw-m850i-xdrive-cabrio-flyout-neu.png" },
+  { "nimi": "Tesla", "hind": 40000, "aktiivne": false, "pilt": "https://cdn.motor1.com/images/mgl/Mk3qg6/s3/2017-tesla-roadster-deck-model-petersen-automotive-museum.jpg" },
+  { "nimi": "Saab", "hind": 50000, "aktiivne": true, "pilt": "https://edgecast-img.yahoo.net/mysterio/api/09BC79B307D801E11158801E00F551208B749AE9B6DEA77183B57C797D19DF27/autoblog/resizefill_w640_h400;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/O2SSGEA1.jpg" },
+  { "nimi": "Opel", "hind": 60000, "aktiivne": false, "pilt": "https://www.opel-uae.com/content/dam/opel/master/vehicles/crossland/bbc/opel_crossland_hero_side_my2100_576x324.png" }
+]

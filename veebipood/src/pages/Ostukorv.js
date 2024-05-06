@@ -8,7 +8,7 @@ function Ostukorv() {
   const [sonum, muudaSonum] = useState("");
 
   const reset = () => {
-    ostukorvFailist.splice(0) //1 esimeses tootest kuni lõpuni tühjendab
+    ostukorvFailist.splice(0); //1 esimeses tootest kuni lõpuni tühjendab
     muudaToodet(ostukorvFailist.slice());
     muudaSonum("Ostukorv on tühi");
   };
@@ -33,11 +33,6 @@ function Ostukorv() {
     muudaToodet(ostukorvFailist.slice()); //tooted ei muutu selles hetkes HTMLis, aga kui db tuleb mängu, siis vb oleks vaja tooted.slice() kasutada
   };
 
-  const lisaVichy = () => {
-    ostukorvFailist.push("Vichy");
-    muudaToodet(ostukorvFailist.slice());
-  };
-
   const lisa = (toode) => {
     ostukorvFailist.push(toode);
     muudaToodet(ostukorvFailist.slice());
@@ -53,15 +48,13 @@ function Ostukorv() {
         <button className="nuppReset" onClick={reset}>
           Tühjenda ostukorv
         </button>
-        {/* <button onClick={kustutaTeine}>Kustuta 2. </button> */}
-        <button onClick={lisaVichy}>Lisa Vichy</button>
-        <button onClick={() => lisa("Vitamin Well")}>Lisa Vitamin Well</button>
         <span className="vastusText">Ostukorvis olevate esemete arv:</span>{" "}
         {tooted.length} <span className="vastusText">tk</span>
         <br />
         {tooted.map((t, index) => (
           <div key={index}>
-            {t}
+            <img className="Pilt" src={t.pilt} alt="TootePilt" />
+            {t.nimi} - {t.hind}€
             {/* panin algselt kustuta({index}) ja see on tegelt objekt, aga tahtsin hoopis numbri saata kaasa */}
             <button onClick={() => kustuta(index)}>x</button>
             <button onClick={() => lisa(t)}>Lisa lõppu juurde</button>

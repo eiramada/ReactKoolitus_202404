@@ -18,47 +18,47 @@ function Esindused() {
   };
 
   function sortAZ() {
-    keskused.sort();
+    keskused.sort((a, b) => a.name.localeCompare(b.name));
     setKeskused(keskused.slice());
   }
 
   function sortZA() {
-    keskused.sort((a, b) => b.localeCompare(a));
+    keskused.sort((a, b) => b.name.localeCompare(a.name));
     setKeskused(keskused.slice());
   }
 
   function sortKasv() {
-    keskused.sort((a, b) => a.length - b.length);
+    keskused.sort((a, b) => a.name.length - b.name.length);
     setKeskused(keskused.slice());
   }
 
   function sortKahan() {
-    keskused.sort((a, b) => b.length - a.length);
+    keskused.sort((a, b) => b.name.length - a.name.length);
     setKeskused(keskused.slice());
   }
 
   function sortKolmasTähtAZ() {
-    keskused.sort((a, b) => a[2].localeCompare(b[2]));
+    keskused.sort((a, b) => a.name[2].localeCompare(b.name[2]));
     setKeskused(keskused.slice());
   }
 
   function filteeri9() {
-    const result = keskused.filter((nimi) => nimi.length === 9);
+    const result = keskused.filter((k) => k.name.length === 9);
     setKeskused(result);
   }
 
   function filteeriÜleSeitse() {
-    const result = keskused.filter((nimi) => nimi.length >= 7);
+    const result = keskused.filter((k) => k.name.length >= 7);
     setKeskused(result);
   }
 
   function filtreeriIS() {
-    const result = keskused.filter((nimi) => nimi.includes("is") === true);
+    const result = keskused.filter((k) => k.name.includes("is") === true);
     setKeskused(result);
   }
 
   function filtreeriE() {
-    const result = keskused.filter((nimi) => nimi.endsWith("e") === true);
+    const result = keskused.filter((k) => k.name.endsWith("e") === true);
     setKeskused(result);
   }
 
@@ -70,7 +70,7 @@ function Esindused() {
       <button onClick={() => {linn="Narva"}}>Narva</button>
       <button onClick={() => {linn="Pärnu"}}>Pärnu</button> */}
       <div>Aktiivne linn: {linn}</div>
-      {linnad.map((city, index) => (
+      {linnad.map((city) => (
         <button
           key={city}
           className={linn === city ? "linn-aktiivne" : "linn"}
@@ -81,12 +81,12 @@ function Esindused() {
       ))}
       <div>
         {keskused.map((keskus, index) => (
-          <div key={index}>
-            {keskus}
-            <Link to={"/esindus/" + linn + "/" + index}>Vaata lähemalt</Link>
+          <div key={`${keskus.name}-${index}`}>
+            {keskus.name}
+            <Link to={`/esindus/${linn}/${keskus.name}`}>Vaata lähemalt</Link>
           </div>
         ))}
-      </div>{" "}
+      </div>
       <br />
       <div>Keskuste arv: {keskused.length}</div>
       <div>

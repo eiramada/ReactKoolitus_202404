@@ -1,13 +1,20 @@
 {
   "Tallinn": [
-    "Ülemiste",
-    "Rocca al Mare",
-    "Magistrali",
-    "Vesse",
-    "Kristiine",
-    "Järveotsa"
+    {"name": "Ülemiste", "phone": "602 3200", "address": "Suur-Sõjamäe 4, 11415 Tallinn"},
+    {"name": "Rocca al Mare", "phone": "665 9100", "address": "Paldiski mnt 102, 13522 Tallinn"},
+    {"name": "Magistrali", "phone": "665 0400", "address": "Sõpruse pst 201/203, 13419 Tallinn"},
+    {"name": "Vesse", "phone": "605 1201", "address": "Punane 16a, 13619 Tallinn"},
+    {"name": "Kristiine", "phone": "665 9100", "address": "Endla 45, 10615 Tallinn"},
+    {"name": "Järveotsa", "phone": "", "address": "Järveotsa tee 51C, Tallinn"}
   ],
-  "Tartu": ["Raatuse", "Lõunakeskus"],
-  "Narva": ["Fama"],
-  "Pärnu": ["Port Artur 2"]
+  "Tartu": [
+    {"name": "Raatuse", "phone": "", "address": "Raatuse 88, 51009 Tartu"},
+    {"name": "Lõunakeskus", "phone": "731 5500", "address": "Ringtee 75, 50501 Tartu"}
+  ],
+  "Narva": [
+    {"name": "Fama", "phone": "356 9500", "address": "Tallinna mnt 19c, 20303 Narva"}
+  ],
+  "Pärnu": [
+    {"name": "Port Artur 2", "phone": "447 8900", "address": "Lai 11, 80010 Pärnu"}
+  ]
 }

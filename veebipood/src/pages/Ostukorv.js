@@ -38,6 +38,12 @@ function Ostukorv() {
     muudaToodet(ostukorvFailist.slice());
   };
 
+  function kokku() {
+    let summa = 0;
+    ostukorvFailist.forEach((t) => (summa = summa + t.hind));
+    return summa;
+  }
+
   return (
     <div>
       <Link to="/avaleht">Mine avalehele</Link>
@@ -61,6 +67,7 @@ function Ostukorv() {
           </div>
         ))}
       </div>
+      <div>Ostukorv: {kokku()} €</div>
     </div>
   );
 }

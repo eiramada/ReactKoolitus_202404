@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import tooted from "../data/tooted.json";
 import NotFound from "./NotFound";
 

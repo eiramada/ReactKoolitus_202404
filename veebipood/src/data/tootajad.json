@@ -1,1 +1,12 @@
-["Urmet", "Kaido", "Liina", "Maiki", "Heidi", "Epp", "Kaire", "Anet", "Maarja"]
+[
+    {"nimi": "Urmet", "age": 34, "city": "Tallinn", "occupation": "Software Developer"},
+    {"nimi": "Kaido", "age": 28, "city": "Tartu", "occupation": "Teacher"},
+    {"nimi": "Liina", "age": 45, "city": "Narva", "occupation": "Architect"},
+    {"nimi": "Maiki", "age": 32, "city": "Pärnu", "occupation": "Graphic Designer"},
+    {"nimi": "Heidi", "age": 29, "city": "Tallinn", "occupation": "Marketing Manager"},
+    {"nimi": "Epp", "age": 36, "city": "Tartu", "occupation": "HR Specialist"},
+    {"nimi": "Kaire", "age": 30, "city": "Pärnu", "occupation": "Nurse"},
+    {"nimi": "Anet", "age": 27, "city": "Tallinn", "occupation": "Journalist"},
+    {"nimi": "Maarja", "age": 39, "city": "Tallinn", "occupation": "Entrepreneur"}
+  ]
+  

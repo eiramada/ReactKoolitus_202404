@@ -31,6 +31,16 @@ function Tooted() {
     muudaTooted(tooted.slice());
   };
 
+  function sortHindKasv() {
+    tooted.sort((a, b) => a.hind - b.hind)
+    muudaTooted(tooted.slice());
+  }
+
+  function sortHindKaha() {
+    tooted.sort((a, b) => b.hind - a.hind)
+    muudaTooted(tooted.slice());
+  }
+
   const lisa = (toode) => {
     ostukorvFailist.push(toode);
     alert("Edukalt lisatud " + toode.nimi);
@@ -53,6 +63,12 @@ function Tooted() {
       </button>
       <button className="nuppFilter" onClick={sorteeriKolmasTähtAZ}>
         Sorteeri kolmandast tähest A-Z
+      </button>
+      <button className="nuppFilter" onClick={sortHindKasv}>
+        Sorteeri hind kasvavalt
+      </button>
+    <  button className="nuppFilter" onClick={sortHindKaha}>
+        Sorteeri hind kahanevalt
       </button>
       <br />
       <br />

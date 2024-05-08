@@ -9,8 +9,8 @@ function HaldaEsindused() {
   const linnad = Object.keys(esindused);
 
   const kustutaKeskus = (index) => {
-    keskused.splice(index, 1);
-    setKeskused(keskused.slice());
+    keskused.splice(esindused[linn][index], 1);
+    setKeskused(esindused[linn].slice());
   };
 
   const lisaUusKeskus = () => {
@@ -28,9 +28,13 @@ function HaldaEsindused() {
     setKeskused(esindused[newCity]);
   };
 
+  const clearAll = () => {
+    setKeskused([]);
+  };
+
   return (
     <div>
-      <button>Tühjenda - mis see tähendab?</button>
+      <button  onClick={clearAll}>Clear</button>
 
       <div>
         <div>
@@ -53,7 +57,7 @@ function HaldaEsindused() {
         <div>
           {keskused.map((keskus, index) => (
             <div key={index}>
-              {keskus}
+              {keskus.name}
               <button onClick={() => kustutaKeskus(index)}>x</button>
               <button onClick={() => lisaKeskusLõppu(keskus)}>
                 lisa lõppu

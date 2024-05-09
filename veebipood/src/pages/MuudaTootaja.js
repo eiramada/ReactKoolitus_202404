@@ -4,7 +4,7 @@ import töötajad from "../data/tootajad.json";
 
 function MuudaTootaja() {
   const { index } = useParams();
-  const tootaja = töötajad[index];
+  const tootaja = töötajad.find(t=> t.nimi === index);
   const nimiRef = useRef();
   const ageRef = useRef();
   const cityRef = useRef();

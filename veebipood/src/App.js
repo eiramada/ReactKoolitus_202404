@@ -26,6 +26,9 @@ import YksEsindus from "./pages/YksEsindus";
 import YksHind from "./pages/YksHind";
 import YksToode from "./pages/YksToode";
 import YksTootaja from "./pages/YksTootaja";
+import Shops from "./pages/Shops";
+//Ta võtab ainult  ContactUs osa, sest ContactUs.jsx-is pole 'export default'
+import { ContactUs } from "./pages/ContactUS";
 
 export function App() {
   const [darkMode, setDarkMode] = useState(
@@ -55,7 +58,7 @@ export function App() {
         <img
           className="mode-button"
           onClick={toLightMode}
-          src="light-mode.png"
+          src="/light-mode.png"
           alt="light mode button"
         />
       )}
@@ -63,7 +66,7 @@ export function App() {
         <img
           className="mode-button"
           onClick={toDarkMode}
-          src="dark-mode.png"
+          src="/dark-mode.png"
           alt="dark mode button"
         />
       )}
@@ -95,6 +98,8 @@ export function App() {
         <Route path="muuda-esindus/:linn/:index" element={<MuudaEsindus />}></Route>
         <Route path="muuda-toode/:index" element={<MuudaToode />}></Route>
         <Route path="muuda-tootaja/:index" element={<MuudaTootaja />}></Route>
+        <Route path="shops" element={<Shops />}></Route>
+        <Route path="contactus" element={<ContactUs />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {/* <div>

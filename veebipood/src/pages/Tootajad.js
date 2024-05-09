@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import töötajad from "../data/tootajad.json";
+import töötajadFailist from "../data/tootajad.json";
 import { Link } from "react-router-dom";
 
 function Tootajad() {
   //pane const enamasti. kui ma tahan muuta muutujat, siis erandkorras let -> käe sees võiks olla const
-  const [tootajad, muudaTootajad] = useState(töötajad);
+  const [tootajad, muudaTootajad] = useState(töötajadFailist);
 
   function reset() {
-    muudaTootajad(töötajad);
+    muudaTootajad(töötajadFailist);
   }
 
   function sortAZ() {
@@ -55,41 +55,41 @@ function Tootajad() {
   }
 
   function filteeriAllaViis() {
-    const result = tootajad.filter((töötaja) => töötaja.nimi.length < 5);
+    const result = töötajadFailist.filter((töötaja) => töötaja.nimi.length < 5);
     muudaTootajad(result);
   }
   function filteeriÜleViis() {
-    const result = tootajad.filter((t) => t.nimi.length > 5);
+    const result = töötajadFailist.filter((t) => t.nimi.length > 5);
     muudaTootajad(result);
   }
 
   function filtreeriK() {
-    const result = tootajad.filter((t) => t.nimi.startsWith("K") === true);
+    const result = töötajadFailist.filter((t) => t.nimi.startsWith("K") === true);
     muudaTootajad(result);
   }
 
   function filtreeriM() {
-    const result = tootajad.filter((t) => t.nimi.startsWith("M") === true);
+    const result = töötajadFailist.filter((t) => t.nimi.startsWith("M") === true);
     muudaTootajad(result);
   }
 
   function filtreeriI() {
-    const result = tootajad.filter((t) => t.nimi[2] === "i");
+    const result = töötajadFailist.filter((t) => t.nimi[2] === "i");
     muudaTootajad(result);
   }
 
   function filteeriKolm() {
-    const result = tootajad.filter((t) => t.nimi.length === 3);
+    const result = töötajadFailist.filter((t) => t.nimi.length === 3);
     muudaTootajad(result);
   }
 
   function filtreeriAI() {
-    const result = tootajad.filter((t) => t.nimi.includes("ai") === true);
+    const result = töötajadFailist.filter((t) => t.nimi.includes("ai") === true);
     muudaTootajad(result);
   }
 
   function filtreeriPaarisTähti() {
-    const result = tootajad.filter((t) => t.nimi.length % 2 === 0);
+    const result = töötajadFailist.filter((t) => t.nimi.length % 2 === 0);
     muudaTootajad(result);
   }
 
@@ -102,62 +102,62 @@ function Tootajad() {
   return (
     <div>
       <div>Tähemärgid kokku {kokku()}</div>
-      <button classnimi="button" onClick={reset}>
+      <button className="button" onClick={reset}>
         Reset
       </button>
       <div>
-        <button classnimi="button" onClick={sortAZ}>
+        <button className="button" onClick={sortAZ}>
           sort A-Z
         </button>
-        <button classnimi="button" onClick={sortZA}>
+        <button className="button" onClick={sortZA}>
           sort z-a
         </button>
-        <button classnimi="button" onClick={sortKasv}>
+        <button className="button" onClick={sortKasv}>
           <img
-            classnimi="buttonImg"
+            className="buttonImg"
             src="sort_asc.png"
             alt=""
             title="sort ascending"
           />
         </button>
-        <button classnimi="button" onClick={sortKahan}>
+        <button className="button" onClick={sortKahan}>
           <img
-            classnimi="buttonImg"
+            className="buttonImg"
             src="sort_desc.png"
             alt=""
             title="sort descending"
           />
         </button>
-        <button classnimi="button" onClick={sortKolmasTähtAZ}>
+        <button className="button" onClick={sortKolmasTähtAZ}>
           sort 3. tähe järgi
         </button>
-        <button classnimi="button" onClick={sortTeineTähtAZ}>
+        <button className="button" onClick={sortTeineTähtAZ}>
           sort 2. tähe järgi
         </button>
       </div>
       <div>
-        <button classnimi="button" onClick={filteeriAllaViis}>
+        <button className="button" onClick={filteeriAllaViis}>
           vähem kui 5
         </button>
-        <button classnimi="button" onClick={filteeriÜleViis}>
+        <button className="button" onClick={filteeriÜleViis}>
           rohkem kui 5
         </button>
-        <button classnimi="button" onClick={filtreeriK}>
+        <button className="button" onClick={filtreeriK}>
           "K" tähega algavad
         </button>
-        <button classnimi="button" onClick={filtreeriM}>
+        <button className="button" onClick={filtreeriM}>
           "M" tähega algavad
         </button>
-        <button classnimi="button" onClick={filtreeriI}>
+        <button className="button" onClick={filtreeriI}>
           3. täht "i"
         </button>
-        <button classnimi="button" onClick={filteeriKolm}>
+        <button className="button" onClick={filteeriKolm}>
           3-tähelised
         </button>
-        <button classnimi="button" onClick={filtreeriAI}>
+        <button className="button" onClick={filtreeriAI}>
           "ai" nimes
         </button>
-        <button classnimi="button" onClick={filtreeriPaarisTähti}>
+        <button className="button" onClick={filtreeriPaarisTähti}>
           paaris arv tähti nimes
         </button>
       </div>

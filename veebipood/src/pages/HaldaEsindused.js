@@ -9,7 +9,7 @@ function HaldaEsindused() {
   const linnad = Object.keys(esindused);
 
   const kustutaKeskus = (index) => {
-    keskused.splice(esindused[linn][index], 1);
+    esindused[linn].splice(index, 1);
     setKeskused(esindused[linn].slice());
   };
 

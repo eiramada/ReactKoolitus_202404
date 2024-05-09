@@ -43,22 +43,22 @@ function Esindused() {
   }
 
   function filteeri9() {
-    const result = keskused.filter((k) => k.name.length === 9);
+    const result = esindused[linn].filter((k) => k.name.length === 9);
     setKeskused(result);
   }
 
   function filteeriÜleSeitse() {
-    const result = keskused.filter((k) => k.name.length >= 7);
+    const result = esindused[linn].filter((k) => k.name.length >= 7);
     setKeskused(result);
   }
 
   function filtreeriIS() {
-    const result = keskused.filter((k) => k.name.includes("is") === true);
+    const result = esindused[linn].filter((k) => k.name.includes("is") === true);
     setKeskused(result);
   }
 
   function filtreeriE() {
-    const result = keskused.filter((k) => k.name.endsWith("e") === true);
+    const result = esindused[linn].filter((k) => k.name.endsWith("e") === true);
     setKeskused(result);
   }
 
@@ -83,7 +83,7 @@ function Esindused() {
         {keskused.map((keskus, index) => (
           <div key={`${keskus.name}-${index}`}>
             {keskus.name}
-            <Link to={`/esindus/${linn}/${keskus.name}`}>Vaata lähemalt</Link>
+            <Link to={`/esindus/${linn}/${index}`}>Vaata lähemalt</Link>
           </div>
         ))}
       </div>

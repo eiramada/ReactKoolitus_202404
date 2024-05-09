@@ -107,3 +107,19 @@ th,
 td {
   border: 1px solid black;
 }
+
+.aktiivne {
+  background-color: rgb(200, 238, 200);
+  border: 1px solid green;
+}
+
+.mitteaktiivne {
+  background-color: rgb(236, 197, 197);
+  border: 1px solid red;
+}
+
+.map {
+  height: 300px;
+  margin-left: 10%;
+  margin-right: 10%;
+}

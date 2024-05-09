@@ -32,18 +32,32 @@ function Tooted() {
   };
 
   function sortHindKasv() {
-    tooted.sort((a, b) => a.hind - b.hind)
+    tooted.sort((a, b) => a.hind - b.hind);
     muudaTooted(tooted.slice());
   }
 
   function sortHindKaha() {
-    tooted.sort((a, b) => b.hind - a.hind)
+    tooted.sort((a, b) => b.hind - a.hind);
     muudaTooted(tooted.slice());
   }
 
   const lisa = (toode) => {
     ostukorvFailist.push(toode);
     alert("Edukalt lisatud " + toode.nimi);
+  };
+
+  const reset = () => {
+    muudaTooted(tootedFailist.slice());
+  };
+
+  const filterActive = () => {
+    const result = tootedFailist.filter((t) => t.aktiivne);  //puhtalt lehelt 
+    muudaTooted(result);
+  };
+  const filterCheap = () => {
+    const result = tootedFailist.filter((t) => t.hind <= 40000);
+    muudaTooted(result);
+
   };
 
   return (
@@ -67,10 +81,15 @@ function Tooted() {
       <button className="nuppFilter" onClick={sortHindKasv}>
         Sorteeri hind kasvavalt
       </button>
-    <  button className="nuppFilter" onClick={sortHindKaha}>
+      <button className="nuppFilter" onClick={sortHindKaha}>
         Sorteeri hind kahanevalt
       </button>
       <br />
+      <div>
+        <button onClick={reset}>Reset</button>
+        <button onClick={filterActive}>Jäta alles aktiivsed</button>
+        <button onClick={filterCheap}>Jäta alles odavamad kui 40 000</button>
+      </div>
       <br />
       <div>
         <span className="vastusText">Toodete koguarv:</span> {tooted.length}{" "}

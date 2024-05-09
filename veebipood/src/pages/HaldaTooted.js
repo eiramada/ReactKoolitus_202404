@@ -64,7 +64,7 @@ function HaldaTooted() {
         </thead>
         <tbody>
           {tooted.map((t, index) => (
-            <tr key={index}>
+            <tr key={index} className={t.aktiivne ? "aktiivne" : "mitteaktiivne"}>
               <td>
                 <img className="Pilt" src={t.pilt} alt="" />
               </td>

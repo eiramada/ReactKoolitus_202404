@@ -4,26 +4,25 @@ import esindused from "../data/keskused.json";
 
 function YksEsindus() {
   const { linn, index } = useParams();
-  // const esindus = esindused[linn] ? esindused[linn][index] : null;
-  const esindus = esindused.find(e => e[linn].name === index)
+   //const esindus = esindused[linn] ? esindused[linn][index] : null;
+  const esindus = esindused[linn].find(e => e.name === index)
 
   if (!esindus) {
     return <div>Esindust ei leitud.</div>;
   }
 
-  const { name, phone, address } = esindus;
 
   return (
     <div>
-      <h1>Esindus: {name}</h1>
+      <h1>Esindus: {esindus.name}</h1>
       <p>
         <strong>Linn:</strong> {linn}
       </p>
       <p>
-        <strong>Telefon:</strong> {phone}
+        <strong>Telefon:</strong> {esindus.phone}
       </p>
       <p>
-        <strong>Aadress:</strong> {address}
+        <strong>Aadress:</strong> {esindus.address}
       </p>
     </div>
   );

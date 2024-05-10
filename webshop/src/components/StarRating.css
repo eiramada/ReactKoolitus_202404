@@ -1,0 +1,26 @@
+.star-rating {
+  cursor: default;
+  display: inline-block;
+}
+
+.star {
+  color: goldenrod;
+  font-size: 20px;
+}
+
+.star-rating:hover {
+  position: relative;
+}
+
+.star-rating[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  white-space: nowrap;
+  z-index: 1;
+  padding: 5px 8px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+}

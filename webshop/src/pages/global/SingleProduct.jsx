@@ -1,9 +1,28 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
+import productsFromFile from "./../../data/products.json";
+import NotFound from "./NotFound";
 
 function SingleProduct() {
+  const { productId } = useParams();
+  const product = productsFromFile.find((p) => p.id === parseInt(productId));
+
+  if (!product) {
+    return <NotFound />;
+  }
+
   return (
-    <div>SingleProduct</div>
-  )
+    <div>
+      <h2>{product.title}</h2>
+      <img src={product.image} alt={product.title} />
+      <div>Price: ${product.price}</div>
+      <div>Description: {product.description}</div>
+      <div>Category: {product.category}</div>
+      <div>
+        Rating: {product.rating.rate} from {product.rating.count} reviews
+      </div>
+    </div>
+  );
 }
 
-export default SingleProduct
+export default SingleProduct;

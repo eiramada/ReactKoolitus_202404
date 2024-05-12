@@ -11,7 +11,7 @@ export const ContactUs = () => {
 
     emailjs
       .sendForm("service_tdfc6us", "template_607qwvd", form.current, {  //form.current annab HTMLi useRefi seest. 
-        publicKey: "jRbpmVG3E9TPzXWCi",
+        publicKey: "TpLuPyHpQX3TmxYwg",
       })
       .then(
         () => {
@@ -36,4 +36,5 @@ export const ContactUs = () => {
       <input type="submit" value="Send" /> <br />
     </form>
   );
+  
 };

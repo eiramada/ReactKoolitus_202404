@@ -18,8 +18,8 @@ function HomePage() {
           <div>{product.title}</div>
           <div>{product.price}</div>
           <button onClick={() => addToCart(product)}>Add to Cart</button>
-          <Link to="/admin/add-product">
-            <button>More Details</button>
+          <Link to={`/product/${product.id}`}>
+            <button>View Details</button>
           </Link>
         </div>
       ))}

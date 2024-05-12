@@ -2,32 +2,67 @@ import React, { useState } from "react";
 
 function Meist() {
   const [kontakt, n2itaKontakt] = useState("");
+  const [valitud, setValitud] = useState("");
+
+  const contacts = [
+    {
+      name: "John Doe",
+      area: "Marketing",
+      phone: "123-456-7890",
+    },
+    {
+      name: "Jane Smith",
+      area: "Finance",
+      phone: "987-654-3210",
+    },
+    {
+      name: "Sam Brown",
+      area: "IT",
+      phone: "555-666-7777",
+    },
+    {
+      name: "Lisa White",
+      area: "HR",
+      phone: "222-333-4444",
+    },
+    {
+      name: "Mark Black",
+      area: "Operations",
+      phone: "888-999-0000",
+    },
+  ];
+
+  function v6taYhendust(töötaja) {
+    n2itaKontakt(töötaja.phone);
+    setValitud(töötaja.name);
+  }
 
   return (
     <div>
-      <div>See on meie töötajate leht</div>
       <div>Meie töötajad:</div>
       <br />
-      <div>Aavo Pärt</div>
-      <div>Uudisklippide taustamuuusika</div>
-      <button onClick={() => n2itaKontakt("+321456987")}>Võta ühendust</button>
-      <br />
-      <br />
-      <div>Kerli</div>
-      <div>Välisturgude spetsialist</div>
-      <button onClick={() => n2itaKontakt("+789456123")}>Võta ühendust</button>
-      <br />
-      <br />
-      <div>Edward</div>
-      <div>Kujundaja</div>
-      <button onClick={() => n2itaKontakt("+963258741")}>Võta ühendust</button>
-      <br />
-      <br />
-      <div>Kelly</div>
-      <div>Reporter</div>
-      <button onClick={() => n2itaKontakt("+654789321")}>Võta ühendust</button>
-      <br />
-      <br />
+      <div>
+        {contacts.map((c, index) => (
+          // <div key={index} className={valitud === c.name ? "valitud" : undefined}>
+          <div
+            key={index}
+            className={valitud === c.name ? "valitud" : undefined}
+          >
+            <div>
+              <strong>Name:</strong> {c.name}
+            </div>
+            <div>
+              <strong>Area:</strong> {c.area}
+            </div>
+            <button onClick={() => v6taYhendust(c)}>Võta ühendust</button>
+
+            <div>
+              <br />
+            </div>
+          </div>
+        ))}
+      </div>
+
       {kontakt !== "" && <div>Tema kontakt {kontakt}</div>}
     </div>
   );

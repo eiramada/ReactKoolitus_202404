@@ -18,7 +18,7 @@ import SingleProduct from "./pages/global/SingleProduct";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <NavigationBar />
 
       <Routes>

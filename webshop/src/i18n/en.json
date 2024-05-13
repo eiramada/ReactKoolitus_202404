@@ -1,0 +1,18 @@
+{
+    "maintain-categories": "Maintain categories",
+    "maintain-shops": "Maintain shops",
+    "edit-product": "Edit product",
+    "maintain-products": "Maintain products",
+    "add-product": "Add product",
+    "nav": {
+      "admin": "Administrator",
+      "shops": "Shops",
+      "cart": "Cart"
+    },
+    "homepage": "Homepage",
+    "contact-us": "Contact Us",
+    "login": "Login",
+    "signup": "Signup",
+
+    "Welcome to React": "Welcome to React and react-i18next"
+  }

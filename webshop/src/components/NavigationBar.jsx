@@ -44,6 +44,9 @@ function NavigationBar() {
               <NavDropdown.Item as={Link} to="/admin/add-product">
                 {t("add-product")}
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/edit-product/:index">
+                {t("edit-product")}
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
 

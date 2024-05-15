@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import StarRating from "../../components/StarRating";
 import productsFromFile from "./../../data/products.json";
 import "./MaintainProducts.css";
-import StarRating from "../../components/StarRating";
 
 function MaintainProducts() {
   const [products, setProducts] = useState(productsFromFile.slice());
@@ -46,7 +46,7 @@ function MaintainProducts() {
               </td>
               <td>
                 <button onClick={() => deleteProduct(index)}>Delete</button>
-                <Link to={`/edit-product/${product.id}`}>
+                <Link to={`/admin/edit-product/${product.id}`}>
                   <button>Edit</button>
                 </Link>
               </td>

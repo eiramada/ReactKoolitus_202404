@@ -23,17 +23,48 @@ function HomePage() {
     localStorage.setItem("cart", JSON.stringify(cartLS));
   }
 
+  function sortAZ() {
+    products.sort((a, b) => a.title.localeCompare(b.title));
+    setProducts(products.slice());
+  }
+
+  function sortZA() {
+    products.sort((a, b) => b.title.localeCompare(a.title));
+    setProducts(products.slice());
+  }
+
+  function sortPriceAsc() {
+    products.sort((a, b) => a.price - b.price);
+    setProducts(products.slice());
+  }
+
+  function sortPriceDesc() {
+    products.sort((a, b) => b.price - a.price);
+    setProducts(products.slice());
+  }
+
+  function filterByCategory(category) {
+    reset();
+    const result = products.filter((p) => p.category === category);
+    setProducts(result);
+  }
+
+  function reset() {
+    setProducts(productsFromFile);
+  }
+
   return (
     <div>
       <div className="button-group">
-        <Button>Sort A-Z</Button>
-        <Button>Sort Z-A</Button>
-        <Button>Sort Price asc</Button>
-        <Button>Sort Price desc</Button>
+        <Button onClick={reset}>Reset</Button>
+        <Button onClick={sortAZ}>Sort A-Z</Button>
+        <Button onClick={sortZA}>Sort Z-A</Button>
+        <Button onClick={sortPriceAsc}>Sort Price asc</Button>
+        <Button onClick={sortPriceDesc}>Sort Price desc</Button>
 
-        <Button>men's clothing</Button>
-        <Button>jewelery</Button>
-        <Button>electronics</Button>
+        <Button onClick={()=>filterByCategory("men's clothing")}>men's clothing</Button>
+        <Button onClick={()=>filterByCategory("jewelery")}>jewelery</Button>
+        <Button onClick={()=>filterByCategory("electronics")}>electronics</Button>
       </div>
       <div className="products">
         {products.map((product) => (

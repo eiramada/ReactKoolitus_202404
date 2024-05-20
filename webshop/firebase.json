@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "public",
+    "site": "react-webshop-2024-05",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

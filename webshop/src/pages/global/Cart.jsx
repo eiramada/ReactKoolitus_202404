@@ -146,7 +146,7 @@ function Cart() {
               select
               label="Select"
               variant="standard"
-              sx={{ minWidth: '200px' }}
+              className="mui-textfield-select"
             >
               {parcelMachines
                 .filter((pm) => pm.A0_NAME === "EE")

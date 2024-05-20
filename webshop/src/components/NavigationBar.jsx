@@ -47,6 +47,12 @@ function NavigationBar() {
               <NavDropdown.Item as={Link} to="/admin/edit-product/:index">
                 {t("edit-product")}
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/supplier">
+            Supplier
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/book-supplier">
+            BookSupplier
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
 

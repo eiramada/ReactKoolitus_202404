@@ -3,10 +3,12 @@ import "./App.css";
 import NavigationBar from "./components/NavigationBar";
 import AddProduct from "./pages/admin/AddProduct";
 import AdminHome from "./pages/admin/AdminHome";
+import BookSupplier from "./pages/admin/BookSupplier";
 import EditProduct from "./pages/admin/EditProduct";
 import MaintainCategories from "./pages/admin/MaintainCategories";
 import MaintainProducts from "./pages/admin/MaintainProducts";
 import MaintainShops from "./pages/admin/MaintainShops";
+import Supplier from "./pages/admin/Supplier";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Cart from "./pages/global/Cart";
@@ -33,6 +35,8 @@ function App() {
         <Route path="admin/add-product" element={<AddProduct />} />
         <Route path="admin/edit-product/:index" element={<EditProduct />} />
         <Route path="admin/maintain-products" element={<MaintainProducts />} />
+        <Route path="admin/supplier" element={<Supplier />} />
+        <Route path="admin/book-supplier" element={<BookSupplier />} />
         <Route
           path="admin/maintain-categories"
           element={<MaintainCategories />}

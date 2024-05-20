@@ -1,5 +1,7 @@
+import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../../css/HomePage.css";
 import productsFromFile from "./../../data/products.json";
 
 function HomePage() {
@@ -23,22 +25,40 @@ function HomePage() {
 
   return (
     <div>
-      {products.map((product) => (
-        <div key={product.id}>
-          <img style={{ width: "100px" }} src={product.image} alt="" />
-          <div>{product.title}</div>
-          <div>{product.price.toFixed(2)} €</div>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-          <Link
-            to={`/product/${product.title
-              .replaceAll(" ", "-")
-              .replaceAll(",", "")
-              .toLowerCase()}`}
-          >
-            <button>View Details</button>
-          </Link>
-        </div>
-      ))}
+      <div className="button-group">
+        <Button>Sort A-Z</Button>
+        <Button>Sort Z-A</Button>
+        <Button>Sort Price asc</Button>
+        <Button>Sort Price desc</Button>
+
+        <Button>men's clothing</Button>
+        <Button>jewelery</Button>
+        <Button>electronics</Button>
+      </div>
+      <div className="products">
+        {products.map((product) => (
+          <div className="home-product" key={product.id}>
+            <img style={{ width: "100px" }} src={product.image} alt="" />
+            <div>
+              {product.title.length > 50
+                ? product.title.substring(0, 50) + "..."
+                : product.title}
+            </div>
+            <div>{product.price.toFixed(2)} €</div>
+            <Button onClick={() => addToCart(product)} variant="contained">
+              Add to Cart
+            </Button>
+            <Link
+              to={`/product/${product.title
+                .replaceAll(" ", "-")
+                .replaceAll(",", "")
+                .toLowerCase()}`}
+            >
+              <Button variant="outlined">View Details</Button>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

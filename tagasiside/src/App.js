@@ -1,9 +1,8 @@
 import { NavLink, Route, Routes } from "react-router-dom";
-
+import "./App.css";
 import Tagasiside from "./pages/Tagasiside";
 import TagasisideAndjad from "./pages/TagasisideAndjad";
-
-import "./App.css";
+import Tegevused from "./pages/Tegevused";
 
 function App() {
   return (
@@ -18,6 +17,9 @@ function App() {
         <NavLink to="/tagasisideAndjad">
           <button>TagasisideAndjad</button>
         </NavLink>
+        <NavLink to="/tegevused">
+          <button>tegevused</button>
+        </NavLink>
       </div>
       <div className="row">
         <div className="col">
@@ -28,6 +30,7 @@ function App() {
               path="/tagasisideAndjad"
               element={<TagasisideAndjad />}
             ></Route>
+            <Route path="/tegevused" element={<Tegevused />}></Route>
           </Routes>
         </div>
       </div>

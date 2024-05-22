@@ -1,14 +1,21 @@
-import React, { useRef, useState } from "react";
-import productsFromFile from "./../../data/products.json";
+import React, { useEffect, useRef, useState } from "react";
 
 function AddProduct() {
   const [message, setMessage] = useState("Add a new product");
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]); //usestate & db päring käivad kokku, kuigi tavaliselt on usestate htmliga kokku
   const nameRef = useRef();
   const priceRef = useRef();
   const imageRef = useRef();
   const descriptionRef = useRef();
   const categoryRef = useRef();
+
+  const url = process.env.REACT_APP_PRODUCTS_DB_URL;
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => setProducts(json || []));  
+  }, [url]);
 
   const validateForm = () => {
     const name = nameRef.current.value;
@@ -42,6 +49,10 @@ function AddProduct() {
       };
 
       products.push(newProduct);
+      fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(products),
+      });
 
       setProducts(products);
       setMessage(`Product ${nameRef.current.value} added!`);
@@ -58,21 +69,23 @@ function AddProduct() {
   };
 
   return (
-    <div>
-      <div>{message}</div>
-      <label htmlFor="name">Name</label>
+    <div> <br />
+      <div>{message}</div> <br />
+      <br />
+      <label htmlFor="name">Name</label> <br />
       <input id="name" ref={nameRef} type="text" />
-      <br />
+      <br /> <br />
       <label htmlFor="price">Price</label>
+      <br />
       <input id="price" ref={priceRef} type="number" />
-      <br />
-      <label htmlFor="image">Image URL</label>
+      <br /> <br />
+      <label htmlFor="image">Image URL</label> <br />
       <input id="image" ref={imageRef} type="text" />
-      <br />
-      <label htmlFor="description">Description</label>
+      <br /> <br />
+      <label htmlFor="description">Description</label> <br />
       <input id="description" ref={descriptionRef} type="text" />
-      <br />
-      <label htmlFor="category">Category</label>
+      <br /> <br />
+      <label htmlFor="category">Category</label> <br />
       <input id="category" ref={categoryRef} type="text" />
       <br />
       <br />

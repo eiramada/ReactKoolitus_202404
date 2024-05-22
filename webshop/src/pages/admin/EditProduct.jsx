@@ -1,14 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating";
 import NotFound from "../global/NotFound";
-import productsFromFile from "./../../data/products.json";
+// import productsFromFile from "./../../data/products.json";
 
 function EditProduct() {
   const { index } = useParams(); //tegelt on index hoopis productID
-  const product = productsFromFile.find((p) => p.id === index);
   // const product = productsFromFile[index];
-
   const titleRef = useRef();
   const priceRef = useRef();
   const descriptionRef = useRef();
@@ -16,16 +14,23 @@ function EditProduct() {
   const imageRef = useRef();
   const ratingRateRef = useRef();
   const ratingCountRef = useRef();
-
   const navigate = useNavigate();
   const [message, setMessage] = useState();
+  const url = process.env.REACT_APP_PRODUCTS_DB_URL;
+  const [products, setProducts] = useState([]);
+  const product = products.find((p) => p.id === Number(index));
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => setProducts(json || []));
+  }, [url]);
 
   if (product === undefined) {
     return <NotFound />;
   }
-
   function editProduct() {
-    const index = productsFromFile.indexOf(product);
+    const index = products.indexOf(product);
 
     if (titleRef.current.value === "") {
       setMessage("Product title cannot be empty!");
@@ -44,11 +49,9 @@ function EditProduct() {
       },
     };
 
-    productsFromFile[index] = updatedProduct;
+    products[index] = updatedProduct;
     navigate("/admin/maintain-products");
   }
-
-
 
   return (
     <div>

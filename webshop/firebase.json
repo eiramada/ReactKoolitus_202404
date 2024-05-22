@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "public": "public",
-    "site": "react-webshop-2024-05",
+  
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",

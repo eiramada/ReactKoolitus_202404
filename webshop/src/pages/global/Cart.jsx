@@ -1,6 +1,6 @@
 import { Button, MenuItem, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import "../../css/Cart.css";
+import styles from "../../css/Cart.module.css";
 
 function Cart() {
   const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
@@ -94,20 +94,20 @@ function Cart() {
         <>
           <Button onClick={empty}>Empty Cart</Button>
           {cart.map((item, index) => (
-            <div className="product" key={index}>
+            <div className={styles.product} key={index}>
               <div>{index + 1}</div>
               <img
-                className="image"
+                className={styles.image}
                 style={{ width: "100px" }}
                 src={item.toode.image}
                 alt=""
               />
-              <div className="title">{item.toode.title}</div>
-              <div className="price">{item.toode.price}</div>
+              <div className={styles.title}>{item.toode.title}</div>
+              <div className={styles.price}>{item.toode.price}</div>
               {/* <button onClick={() => decreaseQuantity(item)}>-</button> */}
-              <div className="quantity">
+              <div className={styles.quantity}>
                 <img
-                  className="button"
+                  className={styles.button}
                   onClick={() => decreaseQuantity(item)}
                   src="/minus.png"
                   alt=""
@@ -115,18 +115,18 @@ function Cart() {
                 <div>{item.kogus} pcs</div>
                 {/* <button onClick={() => increaseQuantity(item)}>+</button> */}
                 <img
-                  className="button"
+                  className={styles.button}
                   onClick={() => increaseQuantity(item)}
                   src="/add.png"
                   alt=""
                 />
               </div>
-              <div className="sum">
+              <div className={styles.sum}>
                 {(item.toode.price * item.kogus).toFixed(2)}
               </div>
               {/* <button onClick={() => removeFromCart(item, index)}>x</button> */}
               <img
-                className="button"
+                className={styles.button}
                 onClick={() => removeFromCart(item, index)}
                 src="/remove.png"
                 alt=""
@@ -134,7 +134,11 @@ function Cart() {
             </div>
           ))}
           <br />
-          <div className="cart-bottom">
+          {/* võimalused cartBottomi nimetamisel.
+          // <span className={styles.cart__bottom}>
+        // <span className={styles.cartBottom}>
+        // <span className={styles['cart-bottom']}> */}
+          <div className={styles.cartBottom}>
             <div>Items in cart: {productSum()} pcs</div>
             <div>Total price: {cartSum()}€</div>
             <Button variant="contained" onClick={pay}>
@@ -146,7 +150,7 @@ function Cart() {
               select
               label="Select"
               variant="standard"
-              className="mui-textfield-select"
+              className={styles.muiTextfieldSelect}
             >
               {parcelMachines
                 .filter((pm) => pm.A0_NAME === "EE")

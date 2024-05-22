@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../../components/StarRating";
-import "../../css/MaintainProducts.css";
+import styles from "../../css/MaintainProducts.module.css";
 import productsFromFile from "./../../data/products.json";
 
 function MaintainProducts() {
@@ -31,7 +31,7 @@ function MaintainProducts() {
       <span>{products.length} pcs</span>
       <table>
         <thead>
-          <tr>
+          <tr >
             <th>Id</th>
             <th>Image</th>
             <th>Title</th>
@@ -43,13 +43,13 @@ function MaintainProducts() {
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <tr key={index}>
+            <tr className={product.active ? styles.active : styles.inactive} key={index}>
               <td>{product.id}</td>
               <td>
                 <img
+                className={styles.picture}
                   src={product.image}
                   alt={product.title}
-                  style={{ width: "50px", height: "50px" }}
                 />
               </td>
               <td>{product.title}</td>

@@ -1,7 +1,8 @@
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../css/HomePage.css";
+import CarouselGallery from "../../components/CarouselGallery";
+import styles from "../../css/HomePage.module.css";
 import productsFromFile from "./../../data/products.json";
 
 function HomePage() {
@@ -55,20 +56,26 @@ function HomePage() {
 
   return (
     <div>
-      <div className="button-group">
+      <CarouselGallery />
+
+      <div className={styles.buttonGroup}>
         <Button onClick={reset}>Reset</Button>
         <Button onClick={sortAZ}>Sort A-Z</Button>
         <Button onClick={sortZA}>Sort Z-A</Button>
         <Button onClick={sortPriceAsc}>Sort Price asc</Button>
         <Button onClick={sortPriceDesc}>Sort Price desc</Button>
 
-        <Button onClick={()=>filterByCategory("men's clothing")}>men's clothing</Button>
-        <Button onClick={()=>filterByCategory("jewelery")}>jewelery</Button>
-        <Button onClick={()=>filterByCategory("electronics")}>electronics</Button>
+        <Button onClick={() => filterByCategory("men's clothing")}>
+          men's clothing
+        </Button>
+        <Button onClick={() => filterByCategory("jewelery")}>jewelery</Button>
+        <Button onClick={() => filterByCategory("electronics")}>
+          electronics
+        </Button>
       </div>
-      <div className="products">
+      <div className={styles.products}>
         {products.map((product) => (
-          <div className="home-product" key={product.id}>
+          <div className={styles.product} key={product.id}>
             <img style={{ width: "100px" }} src={product.image} alt="" />
             <div>
               {product.title.length > 50

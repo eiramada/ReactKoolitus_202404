@@ -47,12 +47,12 @@
   width: 70px;
 }
 
-.cart-bottom {
-    text-align: right;
-    float: right;
-    margin-right: 10%;
+.cartBottom {
+  text-align: right;
+  float: right;
+  margin-right: 10%;
 }
 
-.mui-textfield-select {
+.muiTextfieldSelect {
   min-width: 200px;
 }

@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import joogid from "./data/joogid.json";
 import Avaleht from "./pages/Avaleht";
 import HaldaJooke from "./pages/HaldaJooke";
 import Jook from "./pages/Jook";
 import LisaJook from "./pages/LisaJook";
 
 function App() {
-  const [joogidstate, setJoogid] = useState(joogid);
   return (
     <>
       <div className="App">
@@ -21,7 +18,7 @@ function App() {
         <Link to="/halda">
           <button>Halda jooke</button>
         </Link>
-        <Link to="jook"></Link>
+    
       </div>
       <div className="row">
         <div className="col">

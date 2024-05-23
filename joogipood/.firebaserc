@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "react-koolitus-joogipood",
+    "react-koolitus-joogipood": "react-koolitus-joogipood-6b367"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

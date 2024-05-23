@@ -1,24 +1,39 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import joogid from "../data/joogid.json";
+import React, { useEffect, useRef, useState } from "react";
+import config from "../data/config.json";
 
 function LisaJook() {
   const jookRef = useRef();
-  const navigate = useNavigate();
-  const [joogidState, uuendaJoogid] = useState(joogid);
+  const [joogid, setJoogid] = useState([]);
 
-  const lisaUusJook = () => {
-    joogid.push(jookRef.current.value);
-    uuendaJoogid(joogidState.slice());
-    navigate("/");
-  };
+  useEffect(() => {
+    fetch(config.joogidDbUrl)
+      .then((res) => res.json())
+      .then((json) => setJoogid(json || []));
+  }, [config.joogidDbUrl]);
+
+  function add() {
+    const newJook = { name: jookRef.current.value };
+    console.log(newJook);
+    console.log(config.joogidDbUrl);
+
+    joogid.push(newJook);
+
+    console.log(joogid);
+
+    fetch(config.joogidDbUrl, {
+      method: "PUT",
+      body: JSON.stringify(joogid),
+    });
+    setJoogid(joogid.slice());
+    jookRef.current.value = "";
+  }
 
   return (
     <div>
       <h2>Lisa uus jook</h2>
       <label>Jook:</label>
       <input ref={jookRef} type="text" />
-      <button onClick={lisaUusJook}>Lisa jook</button>
+      <button onClick={add}>Lisa jook</button>
     </div>
   );
 }

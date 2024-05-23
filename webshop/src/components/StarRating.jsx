@@ -4,13 +4,13 @@ import "../css/StarRating.css";
 const StarRating = ({ rating }) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
-    if (i <= rating) {
+    if (i <= parseFloat(rating)) {
       stars.push(
         <span key={i} className="star">
           &#9733;
         </span>
       );
-    } else if (i - 1 < rating && i > rating) {
+    } else if (i - 1 < parseFloat(rating) && i > parseFloat(rating)) {
       stars.push(
         <span key={i} className="star half">
           &#9734;
@@ -26,7 +26,7 @@ const StarRating = ({ rating }) => {
   }
 
   return (
-    <div className="star-rating" title={`Rating: ${rating.toFixed(1)}`}>
+    <div className="star-rating" title={`Rating: ${parseFloat(rating.toFixed(1))}`}>
       {stars}
     </div>
   );

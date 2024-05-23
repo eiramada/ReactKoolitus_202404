@@ -6,6 +6,7 @@ import AdminHome from "./pages/admin/AdminHome";
 import BookSupplier from "./pages/admin/BookSupplier";
 import EditProduct from "./pages/admin/EditProduct";
 import MaintainCategories from "./pages/admin/MaintainCategories";
+import MaintainImages from "./pages/admin/MaintainImages";
 import MaintainProducts from "./pages/admin/MaintainProducts";
 import MaintainShops from "./pages/admin/MaintainShops";
 import Supplier from "./pages/admin/Supplier";
@@ -42,6 +43,7 @@ function App() {
           element={<MaintainCategories />}
         />
         <Route path="admin/maintain-shops" element={<MaintainShops />} />
+        <Route path="admin/maintain-images" element={<MaintainImages />} />
 
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />

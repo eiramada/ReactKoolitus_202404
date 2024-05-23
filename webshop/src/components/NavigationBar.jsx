@@ -41,6 +41,15 @@ function NavigationBar() {
               <NavDropdown.Item as={Link} to="/admin/maintain-products">
                 {t("maintain-products")}
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/maintain-categories">
+                {t("maintain-categories")}
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/maintain-shops">
+                {t("maintain-shops")}
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/maintain-images">
+                {t("maintain-images")}
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/add-product">
                 {t("add-product")}
               </NavDropdown.Item>
@@ -48,10 +57,10 @@ function NavigationBar() {
                 {t("edit-product")}
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/supplier">
-            Supplier
+                Supplier
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/book-supplier">
-            BookSupplier
+                BookSupplier
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

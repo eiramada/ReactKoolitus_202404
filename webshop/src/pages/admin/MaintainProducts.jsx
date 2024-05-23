@@ -22,6 +22,7 @@ function MaintainProducts() {
         p.title.toLowerCase().includes(searchValue) ||
         p.description.toLowerCase().includes(searchValue)
     );
+    console.log(productsFromFile);
     setProducts(result);
   }
 
@@ -31,34 +32,36 @@ function MaintainProducts() {
       <span>{products.length} pcs</span>
       <table>
         <thead>
-          <tr >
+          <tr>
             <th>Id</th>
             <th>Image</th>
             <th>Title</th>
             <th>Price</th>
             <th>Description</th>
             <th>Rating</th>
+
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <tr className={product.active ? styles.active : styles.inactive} key={index}>
+            <tr
+              className={product.active ? styles.active : styles.inactive}
+              key={index}
+            >
               <td>{product.id}</td>
               <td>
                 <img
-                className={styles.picture}
+                  className={styles.image}
                   src={product.image}
                   alt={product.title}
                 />
               </td>
               <td>{product.title}</td>
-              <td>{product.price.toFixed(2)} €</td>
+              <td>{product.price} €</td>
               <td>{product.description}</td>
-              <td>
-                <StarRating rating={product.rating.rate} />
-                <span>({product.rating.count} reviews)</span>{" "}
-              </td>
+              <StarRating rating={product.rating.rate} />
+
               <td>
                 <button onClick={() => deleteProduct(product)}>Delete</button>
                 <Link to={`/admin/edit-product/${product.id}`}>

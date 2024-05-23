@@ -5,6 +5,7 @@ function MaintainCategories() {
   const categoryRef = useRef();
   const url = process.env.REACT_APP_CATEGORIES_DB_URL;
 
+
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -24,7 +25,7 @@ function MaintainCategories() {
     //toast?
     categoryRef.current.value = "";
   }
-  
+
   function remove(index) {
     categories.splice(index, 1);
     setCategories(categories.slice());
@@ -37,9 +38,9 @@ function MaintainCategories() {
 
   return (
     <div>
-      <label>Kategooria</label> <br />
+      <label>Category</label> <br />
       <input ref={categoryRef} type="text" /> <br />
-      <button onClick={add}>Sisesta</button>
+      <button onClick={add}>Add</button>
       <hr />
       {categories?.map((category, index) => (
         <div key={category.name}>

@@ -24,6 +24,9 @@ function AdminHome() {
       <Button as={Link} to="/admin/maintain-shops" variant="info">
         {t("maintain-shops")}
       </Button>{" "}
+      <Button as={Link} to="/admin/maintain-images" variant="info">
+        {t("maintain-images")}
+      </Button>{" "}
       <h1>{t("Welcome to React")}</h1>
     </div>
   );

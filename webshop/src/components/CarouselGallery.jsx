@@ -1,40 +1,28 @@
-import Carousel from 'react-bootstrap/Carousel';
+import { useEffect, useState } from "react";
+import Carousel from "react-bootstrap/Carousel";
 
 function CarouselGallery() {
+  const [images, setImages] = useState([]);
+
+  const url = process.env.REACT_APP_PICTURES_DB_URL;
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => setImages(json || []));
+  }, [url]);
+
   return (
     <Carousel data-bs-theme="dark">
-      <Carousel.Item>
-        <img
-          src="https://picsum.photos/id/237/500/200"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h5>First slide label</h5>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src="https://picsum.photos/id/337/500/200"
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h5>Second slide label</h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src="https://picsum.photos/id/437/500/200"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h5>Third slide label</h5>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+      {images.map((img) => (
+        <Carousel.Item>
+          <img src={img.url} alt={img.alt} />
+          <Carousel.Caption>
+            <h5>{img.header.substring(0,10)}</h5>
+            <p>{img.text.substring(0,20)}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }

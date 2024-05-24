@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productsFromFile from "./../../data/products.json";
-import NotFound from "./NotFound";
 import StarRating from "../../components/StarRating";
+import NotFound from "./NotFound";
+import { Spinner } from "react-bootstrap";
 
 function SingleProduct() {
-  // const { productId } = useParams();
-  // const product = productsFromFile.find((p) => p.id === parseInt(productId));
-  
   const { productTitle } = useParams();
-  // const product = productsFromFile.find(
-    //   (p) =>
-      //     p.title.replaceAll(" ", "-").replaceAll(",", "").toLowerCase() ===
-    //     productTitle
-    // );
-    
-    const [products, setProducts] = useState([]);
+
+  const [isLoading, setLoading] = useState(true);
+
+  const [products, setProducts] = useState([]);
   const product = products.find(
     (p) =>
       p.title.replaceAll(" ", "-").replaceAll(",", "").toLowerCase() ===
@@ -26,8 +20,15 @@ function SingleProduct() {
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setProducts(json || []));
+      .then((json) => {
+        setProducts(json || []);
+        setLoading(false);
+      });
   }, [url]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   if (!product) {
     return <NotFound />;

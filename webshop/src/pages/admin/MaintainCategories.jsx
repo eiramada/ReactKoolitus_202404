@@ -1,21 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
 function MaintainCategories() {
   const [categories, setCategories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
   const categoryRef = useRef();
   const url = process.env.REACT_APP_CATEGORIES_DB_URL;
-
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setCategories(json || []));
+      .then((json) => {
+        setCategories(json || []);
+        setLoading(false);
+      });
   }, [url]); //ära remove'i dependcy array'd, see läheb loopima ja firebase hakkab raha küsima.
   //, [] - sinna tuleb väliseid muutujaid lisada, sest useEffect kardab, et äkki muutujad muutuvad.
   //Ja kui muutujad muutuvad, siis ta läheb uuesti useeffecti tegema. Ka juhul, kui meil URL tegelt ei muutu
 
   function add() {
-    const newCategory = { name: categoryRef.current.value };
+    const newCategory = { name: categoryRef.current.value.toLowerCase() };
     categories.push(newCategory);
     fetch(url, {
       method: "PUT",
@@ -34,6 +39,10 @@ function MaintainCategories() {
       method: "PUT",
       body: JSON.stringify(categories),
     });
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (

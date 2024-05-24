@@ -1,29 +1,47 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import StarRating from "../../components/StarRating";
 import styles from "../../css/MaintainProducts.module.css";
-import productsFromFile from "./../../data/products.json";
+// import productsFromFile from "./../../data/products.json";
 
 function MaintainProducts() {
-  const [products, setProducts] = useState(productsFromFile.slice());
+  const [products, setProducts] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]); //et esialgne seis alles oleks.
   const searchRef = useRef();
+  const [isLoading, setLoading] = useState(true);
+
+  const url = process.env.REACT_APP_PRODUCTS_DB_URL;
+
+  useEffect(() => {
+    fetch(url)
+      .then((result) => result.json())
+      .then((json) => {
+        setProducts(json || []);
+        setDbProducts(json || []);
+        setLoading(false);
+      });
+  }, [url]);
 
   const deleteProduct = (product) => {
-    const index = productsFromFile.indexOf(product);
-    productsFromFile.splice(index, 1);
+    const index = dbProducts.indexOf(product);
+    dbProducts.splice(index, 1);
     // setProducts(productsFromFile.slice()); otsingu tõttu seda ei kasuta
     searchFromProducts();
   };
 
   function searchFromProducts() {
     const searchValue = searchRef.current.value.toLowerCase();
-    const result = productsFromFile.filter(
+    const result = dbProducts.filter(
       (p) =>
         p.title.toLowerCase().includes(searchValue) ||
         p.description.toLowerCase().includes(searchValue)
     );
-    console.log(productsFromFile);
     setProducts(result);
+  }
+
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (
@@ -39,7 +57,6 @@ function MaintainProducts() {
             <th>Price</th>
             <th>Description</th>
             <th>Rating</th>
-
             <th>Actions</th>
           </tr>
         </thead>
@@ -61,7 +78,6 @@ function MaintainProducts() {
               <td>{product.price} €</td>
               <td>{product.description}</td>
               <StarRating rating={product.rating.rate} />
-
               <td>
                 <button onClick={() => deleteProduct(product)}>Delete</button>
                 <Link to={`/admin/edit-product/${product.id}`}>

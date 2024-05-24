@@ -18,7 +18,6 @@ tr:nth-child(even) {
   width: 100px;
 }
 
-
 .active {
   background-color: rgb(227, 241, 227);
 }

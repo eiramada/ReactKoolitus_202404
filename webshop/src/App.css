@@ -22,3 +22,7 @@
 .lang:active {
   padding: 1px;
 }
+
+.carousel img {
+  height: 200px;
+}

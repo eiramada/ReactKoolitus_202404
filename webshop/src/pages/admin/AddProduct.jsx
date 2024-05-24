@@ -11,10 +11,18 @@ function AddProduct() {
 
   const url = process.env.REACT_APP_PRODUCTS_DB_URL;
 
+  const [categories, setCategories] = useState([]);
+  const categoriesUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
+  useEffect(() => {
+    fetch(categoriesUrl)
+      .then((result) => result.json())
+      .then((json) => setCategories(json || []));
+  }, [categoriesUrl]);
+
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((json) => setProducts(json || []));  
+      .then((json) => setProducts(json || []));
   }, [url]);
 
   const validateForm = () => {
@@ -45,6 +53,11 @@ function AddProduct() {
         price: Number(priceRef.current.value),
         image: imageRef.current.value,
         description: descriptionRef.current.value,
+        rating: {
+          rate: 0,
+          count: 0,
+        },
+        active: true,
         category: categoryRef.current.value,
       };
 
@@ -69,7 +82,9 @@ function AddProduct() {
   };
 
   return (
-    <div> <br />
+    <div>
+      {" "}
+      <br />
       <div>{message}</div> <br />
       <br />
       <label htmlFor="name">Name</label> <br />
@@ -86,7 +101,15 @@ function AddProduct() {
       <input id="description" ref={descriptionRef} type="text" />
       <br /> <br />
       <label htmlFor="category">Category</label> <br />
-      <input id="category" ref={categoryRef} type="text" />
+      <select ref={categoryRef}>
+        <option key="0">--- SELECT CATEGORY ---</option>
+        {categories.map((c) => (
+          <option key={c.name}>
+            {c.name}
+          </option>
+        ))}
+      </select>
+      {/* <input id="category" ref={categoryRef} type="text" /> */}
       <br />
       <br />
       <button onClick={addProduct}>Add Product</button>

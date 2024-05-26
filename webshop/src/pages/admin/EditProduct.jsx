@@ -37,7 +37,6 @@ function EditProduct() {
       .then((json) => {
         setProducts(json || []);
         setLoading(false);
-       
       });
   }, [url]);
 

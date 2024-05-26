@@ -8,6 +8,8 @@ function AddProduct() {
   const imageRef = useRef();
   const descriptionRef = useRef();
   const categoryRef = useRef();
+  const idRef = useRef();
+  const [idUnique, setIdUnique] = useState(true);
 
   const url = process.env.REACT_APP_PRODUCTS_DB_URL;
 
@@ -42,13 +44,22 @@ function AddProduct() {
     return "";
   };
 
+  const checkIdUniqueness = () => {
+    const result = products.find((p) => p.id === Number(idRef.current.value));
+    setIdUnique(result === undefined);
+  };
+
   const addProduct = () => {
     const validationMessage = validateForm();
+    if (!idUnique) {
+      setMessage("Error: Product ID must be unique");
+      return;
+    }
     if (validationMessage) {
       setMessage(validationMessage);
     } else {
       const newProduct = {
-        id: products.length + 1,
+        id: Number(idRef.current.value),
         title: nameRef.current.value,
         price: Number(priceRef.current.value),
         image: imageRef.current.value,
@@ -74,6 +85,7 @@ function AddProduct() {
   };
 
   const resetFields = () => {
+    idRef.current.value = "";
     nameRef.current.value = "";
     priceRef.current.value = "";
     imageRef.current.value = "";
@@ -83,9 +95,13 @@ function AddProduct() {
 
   return (
     <div>
-      {" "}
       <br />
       <div>{message}</div> <br />
+      <br />
+      <label htmlFor="id">ID</label>
+      <br />
+      <input id="id" ref={idRef} type="number" onChange={checkIdUniqueness} />
+      <br />
       <br />
       <label htmlFor="name">Name</label> <br />
       <input id="name" ref={nameRef} type="text" />
@@ -104,9 +120,7 @@ function AddProduct() {
       <select ref={categoryRef}>
         <option key="0">--- SELECT CATEGORY ---</option>
         {categories.map((c) => (
-          <option key={c.name}>
-            {c.name}
-          </option>
+          <option key={c.name}>{c.name}</option>
         ))}
       </select>
       {/* <input id="category" ref={categoryRef} type="text" /> */}

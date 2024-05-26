@@ -3,6 +3,7 @@ import "./App.css";
 import Tagasiside from "./pages/Tagasiside";
 import TagasisideAndjad from "./pages/TagasisideAndjad";
 import Tegevused from "./pages/Tegevused";
+import Kasutajad from "./pages/kasutajad";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         <NavLink to="/tegevused">
           <button>tegevused</button>
         </NavLink>
+        <NavLink to="/kasutajad">
+          <button>Kasutajad</button>
+        </NavLink>
       </div>
       <div className="row">
         <div className="col">
@@ -31,6 +35,7 @@ function App() {
               element={<TagasisideAndjad />}
             ></Route>
             <Route path="/tegevused" element={<Tegevused />}></Route>
+            <Route path="/kasutajad" element={<Kasutajad />}></Route>
           </Routes>
         </div>
       </div>

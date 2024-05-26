@@ -1,30 +1,40 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Map from "../../components/Map";
 
 function Shops() {
   const [coordinaates, setCoordinates] = useState({
-    lngLat: [59.4378, 24.7574],
-    zoom: 11,
+    lngLat: [58.888, 25.5425],
+    zoom: 7,
   });
+
+  const shopUrl = process.env.REACT_APP_SHOPS_DB_URL;
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    fetch(shopUrl)
+      .then((res) => res.json())
+      .then((json) => setShops(json || []));
+  }, [shopUrl]);
 
   return (
     <div>
       <Button
-        onClick={() => setCoordinates({ lngLat: [59.4378, 24.7574], zoom: 11 })}
+        onClick={() => setCoordinates({ lngLat: [58.888, 25.5425], zoom: 7 })}
       >
         Kõik poed
       </Button>
-      <Button
-        onClick={() => setCoordinates({ lngLat: [59.4231, 24.7991], zoom: 13 })}
-      >
-        Ülemiste
-      </Button>
-      <Button
-        onClick={() => setCoordinates({ lngLat: [59.4277, 24.7193], zoom: 13 })}
-      >
-        Kristiine
-      </Button>
+
+      {shops.map((shop) => (
+        <Button
+          onClick={() =>
+            setCoordinates({ lngLat: [shop.lat, shop.long], zoom: 15 })
+          }
+        >
+          {shop.name}
+        </Button>
+      ))}
+
       <Map mapCoordinaates={coordinaates} />
     </div>
   );

@@ -1,13 +1,11 @@
-import { MenuItem, TextField } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import styles from "../../css/Cart.module.css";
 
 function ParcelMachines() {
   const [parcelMachines, setParcelMachines] = useState([]); //et htmlis näidata.
-  const [originalParcelMachines, setOriginalParcelMachines] = useState([]); //et htmlis näidata.
-  const [selectedPM, setSelectedPM] = useState("");
-  const pmSearchRef = useRef();
+  const [selectedPM, setSelectedPM] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
   //uef -- tehakse päring kohe lehele tulles.
@@ -15,62 +13,46 @@ function ParcelMachines() {
     fetch("https://www.omniva.ee/locations.json") //fetch meetod saadud aadressilt https://jsonplaceholder.typicode.com/
       .then((response) => response.json())
       .then((json) => {
-        setParcelMachines(json.filter((pm) => pm.A0_NAME === "EE"));
-        setOriginalParcelMachines(json.filter((pm) => pm.A0_NAME === "EE"));
+        const filteredMachines = json.filter((pm) => pm.A0_NAME === "EE");
+        setParcelMachines(filteredMachines);
         setLoading(false);
       });
   }, []);
 
-  const handleSelectPM = (event) => {
-    setSelectedPM(event.target.value);
-    pmSearchRef.current.value = "";
-    searchFromPMs();
+  const handleSelectPM = (event, newValue) => {
+    setSelectedPM(newValue.NAME);
   };
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  function searchFromPMs() {
-    const result = originalParcelMachines.filter((pm) =>
-      pm.NAME.toLowerCase().includes(pmSearchRef.current.value.toLowerCase())
-    );
-
-    setParcelMachines(result);
-  }
-
-  function deleteSelectedPM() {
-    setSelectedPM("");
-  }
-
   return (
     <div>
-      {selectedPM === "" && (
+      {selectedPM === null && (
         <React.Fragment>
-          <input onChange={searchFromPMs} ref={pmSearchRef} type="text" />
-          <TextField
-            id="standard-select-pm"
-            select
-            label="Select"
-            variant="standard"
-            className={styles.muiTextfieldSelect}
+          <Autocomplete
+            id="parcel-machine-search"
+            options={parcelMachines}
+            getOptionLabel={(option) => option.NAME}
+            style={{ minWidth: 200 }}
             value={selectedPM}
             onChange={handleSelectPM}
-            style={{ minWidth: "200px" }}
-          >
-            {parcelMachines.map((pm) => (
-              <MenuItem value={pm.NAME} key={pm.NAME}>
-                {pm.NAME}
-              </MenuItem>
-            ))}
-          </TextField>
-          <br />
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select a parcel machine"
+                variant="standard"
+                className={styles.muiTextfieldSelect}
+              />
+            )}
+          />
         </React.Fragment>
       )}
       {selectedPM !== "" && (
         <div>
           {selectedPM}
-          <button onClick={deleteSelectedPM}>X</button>
+          <button onClick={() => setSelectedPM(null)}>X</button>
         </div>
       )}
     </div>

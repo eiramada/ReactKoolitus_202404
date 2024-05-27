@@ -9,7 +9,10 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // React.StrictMode teeb jõuga 2 renderdamist. Kui selle maha võtta, siis renderdab ainult 1 korra.
+  // npm run build võtab maha strictMode'i, ehk päriskeskkonnas renderdatakse 1 korra.
+  // mitu renderdamist tehase vb nt vigade leidmiseks. 
+  <React.StrictMode> 
     <BrowserRouter>
         <App />
     </BrowserRouter>

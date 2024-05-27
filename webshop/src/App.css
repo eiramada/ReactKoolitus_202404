@@ -26,3 +26,10 @@
 .carousel img {
   height: 200px;
 }
+
+.card {
+  background-color: grey;
+  border-radius: 20px;
+  width: 40%;
+  margin: 5%;
+}

@@ -14,6 +14,9 @@
     "contact-us": "Contact Us",
     "login": "Login",
     "signup": "Signup",
+    "error": {
+      "passwords-do-not-match": "Password do not match!"
+    },
 
     "Welcome to React": "Welcome to React and react-i18next"
   }

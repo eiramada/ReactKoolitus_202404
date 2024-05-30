@@ -14,6 +14,9 @@
     "contact-us": "Võta ühendust",
     "login": "Logi sisse",
     "signup": "Registreeru",
+    "error": {
+      "passwords-do-not-match": "Paroolid ei ühti!"
+    },
 
     "Welcome to React": "Teretulemast!"
   }

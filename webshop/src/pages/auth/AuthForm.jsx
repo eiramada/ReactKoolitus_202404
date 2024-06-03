@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "../../store/AuthContext";
 
 function AuthForm(props) {
   // Ref-e ei saa ifitada
@@ -11,6 +12,8 @@ function AuthForm(props) {
   const rememberMeRef = useRef();
 
   const { t } = useTranslation();
+  const { setLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [message, setMessage] = useState("");
 
@@ -44,11 +47,20 @@ function AuthForm(props) {
         if (body.error) {
           setMessage(body.error.message);
         } else {
+          if (
+            rememberMeRef.current !== undefined &&
+            rememberMeRef.current.checked === true
+          ) {
+            localStorage.setItem("email", emailRef.current.value);
+          }
           setMessage("else SUCCESS!");
+          setLoggedIn(true);
+          navigate("/admin");
+          sessionStorage.setItem("token", body.idToken);
         }
       });
 
-    setMessage("SUCCESS!");
+    // setMessage("SUCCESS!");
   }
 
   return (
@@ -84,6 +96,11 @@ function AuthForm(props) {
                     id="email"
                     placeholder="Enter email"
                     ref={emailRef}
+                    defaultValue={
+                      props.IsRememberMe === true
+                        ? localStorage.getItem("email")
+                        : undefined
+                    }
                   />
                 </div>
 

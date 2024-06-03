@@ -27,6 +27,10 @@ function MaintainProducts() {
     const index = dbProducts.indexOf(product);
     dbProducts.splice(index, 1);
     // setProducts(productsFromFile.slice()); otsingu tõttu seda ei kasuta
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(dbProducts),
+    });
     searchFromProducts();
   };
 

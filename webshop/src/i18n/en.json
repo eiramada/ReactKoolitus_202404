@@ -14,6 +14,7 @@
     "contact-us": "Contact Us",
     "login": "Login",
     "signup": "Signup",
+    "logout": "Logout",
     "error": {
       "passwords-do-not-match": "Password do not match!"
     },

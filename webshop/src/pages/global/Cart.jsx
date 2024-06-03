@@ -1,12 +1,14 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ParcelMachines from "../../components/cart/ParcelMachines";
 import Payment from "../../components/cart/Payment";
 import styles from "../../css/Cart.module.css";
+import { CartSumContext } from "../../store/CartSumContext";
 
 function Cart() {
   const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
   const [cart, setCart] = useState(cartLS);
+  const { setCartSum } = useContext(CartSumContext);
 
   function removeFromCart(productToRemove, index) {
     // const index = cart.findIndex((item) => item.id === productToRemove.id);
@@ -36,7 +38,7 @@ function Cart() {
   function cartSum() {
     let sum = 0;
     cart.forEach((item) => (sum = sum + item.toode.price * item.kogus));
-    return sum.toFixed(2);
+    return sum.toFixed(2); //-- sõna
   }
 
   function productSum() {
@@ -48,6 +50,7 @@ function Cart() {
   function saveCart(cart) {
     setCart(cart.slice()); //see muudab htmli
     localStorage.setItem("cart", JSON.stringify(cart)); //see salvestab
+    setCartSum(cartSum()); //muudab NavigationBaril kogusummat
   }
 
   return (

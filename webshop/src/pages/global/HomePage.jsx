@@ -65,6 +65,7 @@ function HomePage() {
 
             {categories.map((cat) => (
               <FilterButton
+                key={cat}
                 cat={cat.name}
                 dbProducts={dbProducts}
                 setProducts={setProducts}
@@ -84,7 +85,7 @@ function HomePage() {
 
           <div className={styles.products}>
             {products.map((product) => (
-              <Product product={product} />
+              <Product key={product.id} product={product} />
             ))}
           </div>
         </div>

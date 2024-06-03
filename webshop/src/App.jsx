@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { useContext } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavigationBar from "./components/NavigationBar";
 import AddProduct from "./pages/admin/AddProduct";
@@ -18,8 +19,11 @@ import HomePage from "./pages/global/HomePage";
 import NotFound from "./pages/global/NotFound";
 import Shops from "./pages/global/Shops";
 import SingleProduct from "./pages/global/SingleProduct";
+import { AuthContext } from "./store/AuthContext";
 
 function App() {
+  const { loggedIn } = useContext(AuthContext);
+
   return (
     <div className="App">
       <NavigationBar />
@@ -31,22 +35,35 @@ function App() {
         <Route path="cart" element={<Cart />} />
         {/* <Route path="product/:productId" element={<SingleProduct />} /> */}
         <Route path="product/:productTitle" element={<SingleProduct />} />
+        {loggedIn && (
+          <>
+            <Route path="admin" element={<AdminHome />} />
+            <Route path="admin/add-product" element={<AddProduct />} />
+            <Route path="admin/edit-product/:index" element={<EditProduct />} />
+            <Route
+              path="admin/maintain-products"
+              element={<MaintainProducts />}
+            />
+            <Route path="admin/supplier" element={<Supplier />} />
+            <Route path="admin/book-supplier" element={<BookSupplier />} />
+            <Route
+              path="admin/maintain-categories"
+              element={<MaintainCategories />}
+            />
+            <Route path="admin/maintain-shops" element={<MaintainShops />} />
+            <Route path="admin/maintain-images" element={<MaintainImages />} />
+          </>
+        )}
 
-        <Route path="admin" element={<AdminHome />} />
-        <Route path="admin/add-product" element={<AddProduct />} />
-        <Route path="admin/edit-product/:index" element={<EditProduct />} />
-        <Route path="admin/maintain-products" element={<MaintainProducts />} />
-        <Route path="admin/supplier" element={<Supplier />} />
-        <Route path="admin/book-supplier" element={<BookSupplier />} />
-        <Route
-          path="admin/maintain-categories"
-          element={<MaintainCategories />}
-        />
-        <Route path="admin/maintain-shops" element={<MaintainShops />} />
-        <Route path="admin/maintain-images" element={<MaintainImages />} />
+        {loggedIn === false && (
+          // <Route path="admin/*" element={<Login />} />
+          <Route path="admin/*" element={<Navigate to={"/login"} />} />
+        )}
 
+        {/* loggedIn === false, siis näita neid */}
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        {/* loggedIn === true, siis manuaalselt /login või /signup lehele minnes, suuna /admin */}
 
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,10 +1,13 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/HomePage.module.css";
+import { CartSumContext } from "../../store/CartSumContext";
 
 //({product}) --> lühendatud versioon (props) variandist, object destructing
 function Product({ product }) {
+  const { setCartSum } = useContext(CartSumContext);
+
   function addToCart(product) {
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -17,11 +20,15 @@ function Product({ product }) {
       cartLS.push({ kogus: 1, toode: product });
     }
 
+    let sum = 0;
+    cartLS.forEach((item) => (sum = sum + item.toode.price * item.kogus));
+
+    setCartSum(sum.toFixed(2));
     localStorage.setItem("cart", JSON.stringify(cartLS));
   }
 
   return (
-    <div className={styles.product} key={product.id}>
+    <div className={styles.product}>
       <img style={{ width: "100px" }} src={product.image} alt="" />
       <div>
         {product.title.length > 50

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,14 +6,18 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { CartSumContext } from "../store/CartSumContext";
+import { useSelector } from "react-redux";
 import { AuthContext } from "../store/AuthContext";
+import { CartSumContext } from "../store/CartSumContext";
 
 function NavigationBar() {
   const { t, i18n } = useTranslation();
   const { cartSum } = useContext(CartSumContext);
   const { loggedIn, setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const count = useSelector((state) => state.counter.value);
+  const cartTotal = useSelector((state) => state.cartTotal.value);
 
   function changeLanguage(lang) {
     i18n.changeLanguage(lang); //lang peab olema sama, mis i18n.js failis
@@ -78,6 +82,8 @@ function NavigationBar() {
             )}
           </Nav>
           <Nav>
+            {/* <span>{count} tk</span> */}
+            <span>{cartTotal} tk -carttotal</span>
             <span>{cartSum} €</span>
             {!loggedIn && (
               <>

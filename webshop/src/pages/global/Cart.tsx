@@ -1,27 +1,47 @@
 import { Button } from "@mui/material";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import ParcelMachines from "../../components/cart/ParcelMachines";
 import Payment from "../../components/cart/Payment";
 import styles from "../../css/Cart.module.css";
 import { CartSumContext } from "../../store/CartSumContext";
+import {
+  decrement as d,
+  increment as i,
+  incrementByAmount,
+} from "../../store/counterSlice";
+
+import {
+  empty as cartTotalEmpty,
+  decrement,
+  decrementByAmount,
+  increment,
+} from "../../store/cartTotalSlice";
 
 function Cart() {
-  const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
-  const [cart, setCart] = useState(cartLS);
+  const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
+  const [cart, setCart] = useState<any[]>(cartLS);
   const { setCartSum } = useContext(CartSumContext);
+  const dispatch = useDispatch(); //kui dispatch toimub, siis reduxi muutuja muutub.
 
-  function removeFromCart(productToRemove, index) {
+  function removeFromCart(index: number) {
+    dispatch(incrementByAmount(cart[index].kogus));
+    dispatch(decrementByAmount(cart[index].kogus));
     // const index = cart.findIndex((item) => item.id === productToRemove.id);
     cart.splice(index, 1);
     saveCart(cart);
   }
 
   function empty() {
+    dispatch(cartTotalEmpty());
     cart.splice(0);
     saveCart(cart);
   }
 
-  const decreaseQuantity = (item) => {
+  const decreaseQuantity = (item: any) => {
+    dispatch(d());
+    dispatch(decrement());
+
     item.kogus--;
     if (item.kogus === 0) {
       const index = cart.indexOf(item);
@@ -30,24 +50,27 @@ function Cart() {
     saveCart(cart);
   };
 
-  const increaseQuantity = (item) => {
+  const increaseQuantity = (item: any) => {
+    dispatch(i());
+    dispatch(increment());
+
     item.kogus++;
     saveCart(cart);
   };
 
   function cartSum() {
     let sum = 0;
-    cart.forEach((item) => (sum = sum + item.toode.price * item.kogus));
+    cart.forEach((item: any) => (sum = sum + item.toode.price * item.kogus));
     return sum.toFixed(2); //-- sõna
   }
 
   function productSum() {
     let sum = 0;
-    cart.forEach((item) => (sum = sum + item.kogus));
+    cart.forEach((item: any) => (sum = sum + item.kogus));
     return sum;
   }
 
-  function saveCart(cart) {
+  function saveCart(cart: any) {
     setCart(cart.slice()); //see muudab htmli
     localStorage.setItem("cart", JSON.stringify(cart)); //see salvestab
     setCartSum(cartSum()); //muudab NavigationBaril kogusummat
@@ -58,7 +81,7 @@ function Cart() {
       {cart.length > 0 && (
         <>
           <Button onClick={empty}>Empty Cart</Button>
-          {cart.map((item, index) => (
+          {cart.map((item: any, index: number) => (
             <div className={styles.product} key={index}>
               <div>{index + 1}</div>
               <img
@@ -92,7 +115,7 @@ function Cart() {
               {/* <button onClick={() => removeFromCart(item, index)}>x</button> */}
               <img
                 className={styles.button}
-                onClick={() => removeFromCart(item, index)}
+                onClick={() => removeFromCart(index)}
                 src="/remove.png"
                 alt=""
               />

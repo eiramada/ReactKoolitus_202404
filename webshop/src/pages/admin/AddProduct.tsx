@@ -1,20 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function AddProduct() {
   const [message, setMessage] = useState("Add a new product");
-  const [products, setProducts] = useState([]); //usestate & db päring käivad kokku, kuigi tavaliselt on usestate htmliga kokku
-  const nameRef = useRef();
-  const priceRef = useRef();
-  const imageRef = useRef();
-  const descriptionRef = useRef();
-  const categoryRef = useRef();
-  const idRef = useRef();
+  const [products, setProducts] = useState<any[]>([]); //usestate & db päring käivad kokku, kuigi tavaliselt on usestate htmliga kokku
+
   const [idUnique, setIdUnique] = useState(true);
+  const [categories, setCategories] = useState<{ name: string }[]>([]);
 
-  const url = process.env.REACT_APP_PRODUCTS_DB_URL;
+  const idRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const priceRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
+  const categoryRef = useRef<HTMLSelectElement>(null);
 
-  const [categories, setCategories] = useState([]);
-  const categoriesUrl = process.env.REACT_APP_CATEGORIES_DB_URL;
+  const url = process.env.REACT_APP_PRODUCTS_DB_URL || "";
+  const categoriesUrl = process.env.REACT_APP_CATEGORIES_DB_URL || "";
+
   useEffect(() => {
     fetch(categoriesUrl)
       .then((result) => result.json())
@@ -28,6 +30,8 @@ function AddProduct() {
   }, [url]);
 
   const validateForm = () => {
+    if (!nameRef.current || !priceRef.current) return;
+
     const name = nameRef.current.value;
     const price = priceRef.current.value;
     if (!name) {
@@ -36,7 +40,7 @@ function AddProduct() {
       return "Error: Product name must start with a capital letter";
     } else if (name.includes("/")) {
       return "Error: Product name cannot contain slashes";
-    } else if (price && isNaN(price)) {
+    } else if (price && isNaN(Number(price))) {
       return "Error: Price must be numeric";
     } else if (price && Number(price) <= 0) {
       return "Error: Price must be greater than 0";
@@ -45,7 +49,13 @@ function AddProduct() {
   };
 
   const checkIdUniqueness = () => {
-    const result = products.find((p) => p.id === Number(idRef.current.value));
+    const idInput = idRef.current; //see on kummaline koht, aga miskipärast töötab.
+
+    if (idInput === null) {
+      return;
+    }
+
+    const result = products.find((p) => p.id === Number(idInput.value));
     setIdUnique(result === undefined);
   };
 
@@ -59,17 +69,17 @@ function AddProduct() {
       setMessage(validationMessage);
     } else {
       const newProduct = {
-        id: Number(idRef.current.value),
-        title: nameRef.current.value,
-        price: Number(priceRef.current.value),
-        image: imageRef.current.value,
-        description: descriptionRef.current.value,
+        id: idRef.current ? Number(idRef.current.value) : 0,
+        title: nameRef.current ? nameRef.current.value : "",
+        price: priceRef.current ? Number(priceRef.current.value) : 0,
+        image: imageRef.current ? imageRef.current.value : "",
+        description: descriptionRef.current ? descriptionRef.current.value : "",
         rating: {
           rate: 0,
           count: 0,
         },
         active: true,
-        category: categoryRef.current.value,
+        category: categoryRef.current ? categoryRef.current.value : "",
       };
 
       products.push(newProduct);
@@ -79,18 +89,20 @@ function AddProduct() {
       });
 
       setProducts(products);
-      setMessage(`Product ${nameRef.current.value} added!`);
+      setMessage(
+        `Product ${nameRef.current ? nameRef.current.value : ""} added!`
+      );
       resetFields();
     }
   };
 
   const resetFields = () => {
-    idRef.current.value = "";
-    nameRef.current.value = "";
-    priceRef.current.value = "";
-    imageRef.current.value = "";
-    descriptionRef.current.value = "";
-    categoryRef.current.value = "";
+    if (idRef.current) idRef.current.value = "";
+    if (nameRef.current) nameRef.current.value = "";
+    if (priceRef.current) priceRef.current.value = "";
+    if (imageRef.current) imageRef.current.value = "";
+    if (descriptionRef.current) descriptionRef.current.value = "";
+    if (categoryRef.current) categoryRef.current.value = "";
   };
 
   return (

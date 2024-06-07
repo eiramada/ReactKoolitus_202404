@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating";
 import NotFound from "./NotFound";
-import { Spinner } from "react-bootstrap";
 
 function SingleProduct() {
   const { productTitle } = useParams();
 
   const [isLoading, setLoading] = useState(true);
-
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<any[]>([]);
   const product = products.find(
     (p) =>
       p.title.replaceAll(" ", "-").replaceAll(",", "").toLowerCase() ===
@@ -18,6 +17,9 @@ function SingleProduct() {
   const url = process.env.REACT_APP_PRODUCTS_DB_URL;
 
   useEffect(() => {
+    if (url === undefined) {
+      return;
+    }
     fetch(url)
       .then((res) => res.json())
       .then((json) => {

@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
-import React from "react";
 
-function Payment(props) {
+function Payment(props: { amount: string }) {
   function pay() {
     //enne maksmist paneme andmebaasi, muuhulgas saame nii ID (order reference)
 

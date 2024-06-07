@@ -1,14 +1,21 @@
 import { Button } from "@mui/material";
-import React, { useContext } from "react";
+import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "../../css/HomePage.module.css";
 import { CartSumContext } from "../../store/CartSumContext";
+import { increment as cartTotalincrement } from "../../store/cartTotalSlice";
+import { increment } from "../../store/counterSlice";
 
 //({product}) --> lühendatud versioon (props) variandist, object destructing
 function Product({ product }) {
   const { setCartSum } = useContext(CartSumContext);
+  const dispatch = useDispatch();
 
   function addToCart(product) {
+    dispatch(increment());
+    dispatch(cartTotalincrement());
+
     const cartLS = JSON.parse(localStorage.getItem("cart")) || [];
 
     const index = cartLS.findIndex((p) => p === product);

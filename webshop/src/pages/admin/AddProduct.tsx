@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { Category } from "../../models/Category";
+import { Product } from "../../models/Product";
 
 function AddProduct() {
   const [message, setMessage] = useState("Add a new product");
-  const [products, setProducts] = useState<any[]>([]); //usestate & db päring käivad kokku, kuigi tavaliselt on usestate htmliga kokku
+  const [products, setProducts] = useState<Product[]>([]); //usestate & db päring käivad kokku, kuigi tavaliselt on usestate htmliga kokku
 
   const [idUnique, setIdUnique] = useState(true);
-  const [categories, setCategories] = useState<{ name: string }[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -23,6 +25,7 @@ function AddProduct() {
       .then((json) => setCategories(json || []));
   }, [categoriesUrl]);
 
+  
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import StarRating from "../../components/StarRating";
+import { Product } from "../../models/Product";
 import NotFound from "./NotFound";
 
 function SingleProduct() {
   const { productTitle } = useParams();
 
   const [isLoading, setLoading] = useState(true);
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const product = products.find(
     (p) =>
       p.title.replaceAll(" ", "-").replaceAll(",", "").toLowerCase() ===

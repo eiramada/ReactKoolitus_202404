@@ -1,5 +1,9 @@
 import { Button } from "@mui/material";
 
+type PaymentProps = {
+  amount: string;
+};
+
 function Payment(props: { amount: string }) {
   function pay() {
     //enne maksmist paneme andmebaasi, muuhulgas saame nii ID (order reference)
@@ -11,7 +15,7 @@ function Payment(props: { amount: string }) {
       timestamp: new Date(),
       amount: props.amount,
       order_reference: Math.random() * 99999999,
-      customer_url: "https://err.ee",
+      customer_url: "react-webshop-2024-05.web.app",
       api_username: "92ddcfab96e34a5f",
     };
     const paymentHeaders = {

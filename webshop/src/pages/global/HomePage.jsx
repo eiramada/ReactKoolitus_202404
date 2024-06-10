@@ -63,9 +63,9 @@ function HomePage() {
               dbProducts={dbProducts}
             />
 
-            {categories.map((cat) => (
+            {categories.map((cat, index) => (
               <FilterButton
-                key={cat}
+                key={index+cat}
                 cat={cat.name}
                 dbProducts={dbProducts}
                 setProducts={setProducts}
@@ -73,8 +73,9 @@ function HomePage() {
             ))}
 
             <br />
-            {productCategories.map((cat) => (
+            {productCategories.map((cat, index) => (
               <FilterButton
+              key={cat+index}
                 cat={cat}
                 dbProducts={dbProducts}
                 setProducts={setProducts}

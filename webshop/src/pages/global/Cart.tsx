@@ -1,28 +1,57 @@
 import { Button } from "@mui/material";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import ParcelMachines from "../../components/cart/ParcelMachines";
 import Payment from "../../components/cart/Payment";
 import styles from "../../css/Cart.module.css";
+import { CartProduct } from "../../models/CartProduct";
+import { Product } from "../../models/Product";
 import { CartSumContext } from "../../store/CartSumContext";
-import {
-  decrement as d,
-  increment as i,
-  incrementByAmount,
-} from "../../store/counterSlice";
-
 import {
   empty as cartTotalEmpty,
   decrement,
   decrementByAmount,
   increment,
 } from "../../store/cartTotalSlice";
+import {
+  decrement as d,
+  increment as i,
+  incrementByAmount,
+} from "../../store/counterSlice";
 
 function Cart() {
-  const cartLS = JSON.parse(localStorage.getItem("cart") || "[]");
-  const [cart, setCart] = useState<any[]>(cartLS);
+  const cartLS: CartProduct[] = useMemo(
+    () => JSON.parse(localStorage.getItem("cart") || "[]"),
+    []
+  );
+  const [cart, setCart] = useState<CartProduct[]>([]);
   const { setCartSum } = useContext(CartSumContext);
   const dispatch = useDispatch(); //kui dispatch toimub, siis reduxi muutuja muutub.
+
+  const url = process.env.REACT_APP_PRODUCTS_DB_URL || "";
+
+  //useCallbackita läheb findCartProductsWithDbProducts loopima
+  //kui on const, siis see peab olema enne useEffecti = järjekord on oluline
+  const findCartProductsWithDbProducts = useCallback(
+    (json: Product[]) => {
+      const cartWithOriginalProducts: CartProduct[] = cartLS
+        .map((cartProduct) => ({
+          kogus: cartProduct.kogus,
+          toode: json.find((p) => p.id === cartProduct.toode.id),
+        }))
+        .filter((item): item is CartProduct => item.toode !== undefined);
+      setCart(cartWithOriginalProducts);
+    },
+    [cartLS]
+  );
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((json: Product[]) => {
+        findCartProductsWithDbProducts(json);
+      });
+  }, [url, findCartProductsWithDbProducts]);
 
   function removeFromCart(index: number) {
     dispatch(incrementByAmount(cart[index].kogus));
@@ -38,7 +67,7 @@ function Cart() {
     saveCart(cart);
   }
 
-  const decreaseQuantity = (item: any) => {
+  const decreaseQuantity = (item: CartProduct) => {
     dispatch(d());
     dispatch(decrement());
 
@@ -50,7 +79,7 @@ function Cart() {
     saveCart(cart);
   };
 
-  const increaseQuantity = (item: any) => {
+  const increaseQuantity = (item: CartProduct) => {
     dispatch(i());
     dispatch(increment());
 
@@ -60,13 +89,15 @@ function Cart() {
 
   function cartSum() {
     let sum = 0;
-    cart.forEach((item: any) => (sum = sum + item.toode.price * item.kogus));
+    cart.forEach(
+      (item: CartProduct) => (sum = sum + item.toode.price * item.kogus)
+    );
     return sum.toFixed(2); //-- sõna
   }
 
   function productSum() {
     let sum = 0;
-    cart.forEach((item: any) => (sum = sum + item.kogus));
+    cart.forEach((item: CartProduct) => (sum = sum + item.kogus));
     return sum;
   }
 
@@ -81,7 +112,7 @@ function Cart() {
       {cart.length > 0 && (
         <>
           <Button onClick={empty}>Empty Cart</Button>
-          {cart.map((item: any, index: number) => (
+          {cart.map((item: CartProduct, index: number) => (
             <div className={styles.product} key={index}>
               <div>{index + 1}</div>
               <img

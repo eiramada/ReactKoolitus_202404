@@ -2,22 +2,45 @@ import React, { useRef, useState } from "react";
 
 function LisaTegelane() {
   const [sonum, uuendaSonum] = useState("");
-  const nimiRef = useRef(null);
+  const eesnimiRef = useRef();
+  const perenimiRef = useRef();
+  const asukohtRef = useRef();
+  const vanusRef = useRef();
+  const [tegelased, setTegelased] = useState(
+    JSON.parse(localStorage.getItem("tegelased")) || []
+  );
 
   function lisaUusTegelane() {
-    if (nimiRef.current.value === "") {
+    if (eesnimiRef.current.value === "") {
       uuendaSonum("Tühja nimega ei saa sisestada");
       return;
     }
-    uuendaSonum(`Tegelane ${nimiRef.current.value} lisatud`);
+
+    const tegelane = {
+      firstName: eesnimiRef.current.value,
+      lastName: perenimiRef.current.value,
+      location: asukohtRef.current.value,
+      age: Number(vanusRef.current.value),
+    };
+
+    const updatedTegelased = [...tegelased, tegelane];
+    localStorage.setItem("tegelased", JSON.stringify(updatedTegelased));
+    setTegelased(updatedTegelased);
+
+    uuendaSonum(`Tegelane ${eesnimiRef.current.value} lisatud`);
   }
 
   return (
     <div>
       <div>{sonum}</div>
       <label>Tegelase nimi</label> <br />
-      <input ref={nimiRef} type="text" /> <br />
-      <button onClick={() => lisaUusTegelane()}>Lisa uus</button>
+      <input ref={eesnimiRef} type="text" /> <br />
+      <input ref={perenimiRef} type="text" /> <br />
+      <label>Asukoht</label> <br />
+      <input ref={asukohtRef} type="text" /> <br />
+      <label>Vanus</label> <br />
+      <input ref={vanusRef} type="number" /> <br />
+      <button onClick={lisaUusTegelane}>Lisa uus</button>
       <br />
     </div>
   );
